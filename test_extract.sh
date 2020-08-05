@@ -1,0 +1,17 @@
+OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=5 python baseline.py \
+    --port 8825 \
+    --image_size 512 512 \
+    --batch 1 \
+    --lr 1e-3 \
+    --sf test \
+    --workers 8 \
+    --test --tuple \
+    --topk 100 \
+    --dataset 0 \
+    --extractor 0 \
+    --metric 0 \
+    --floor b1 \
+    --test_all \
+    --ckpt_path arxiv/D2_pre.pth.tar \
+    --Ensemble \
+    --cen_crop
