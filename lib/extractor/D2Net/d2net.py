@@ -5,6 +5,12 @@ import torchvision.models as models
 
 import numpy as np
 
+from lib.extractor.D2Net.lib.utils import preprocess_image
+from lib.extractor.D2Net.lib.pyramid import process_multiscale
+from lib.extractor.D2Net.lib.model_test import D2Net as d2test
+
+from lib import metric as mt
+from lib import datasets as db
 class DenseFeatureExtractionModule(nn.Module):
     def __init__(self, finetune_feature_extraction=False, use_cuda=True):
         super(DenseFeatureExtractionModule, self).__init__()
@@ -37,7 +43,7 @@ class DenseFeatureExtractionModule(nn.Module):
             # Unlock conv4_3
             for param in list(self.model.parameters())[-2 :]:
                 param.requires_grad = True
-        import pdb;pdb.set_trace()
+
         if use_cuda:
             self.model = self.model.cuda()
 
@@ -121,14 +127,21 @@ class D2Net(nn.Module):
             'dense_features2': dense_features2,
             'scores2': scores2
         }
+
+
+
 class D2Net_local_extractor():
-    def __init__(self,  model_file, use_relu=True, max_edge=1600, max_sum_edges=2800, preprocessing='caffe', multiscale=False):
+    def __init__(self, args, model_file, use_relu=True, max_edge=1600, max_sum_edges=2800, preprocessing='caffe', multiscale=False, postprocessing=False, keypoints_threshold=None, max_keypoints=None):
         super(D2Net_local_extractor, self).__init__()
 
+        self.args = args
         self.max_edge = max_edge
         self.max_sum_edges = max_sum_edges
         self.preprocessing = preprocessing
         self.multiscale = multiscale
+        self.postprocessing = postprocessing
+        self.keypoints_threshold = keypoints_threshold
+        self.max_keypoints = max_keypoints
         self.model = d2test(
                             model_file=model_file,
                             use_relu=use_relu,
@@ -168,15 +181,31 @@ class D2Net_local_extractor():
                     self.model,
                     scales=[1]
                 )
-        
+
         keypoints[:, 0] *= fact_i
         keypoints[:, 1] *= fact_j
         # i, j -> u, v
         keypoints = keypoints[:, [1, 0, 2]]
 
+        if self.postprocessing:
+            scores = torch.nn.functional.normalize(torch.from_numpy(scores), dim=0).numpy()
+
+            if self.keypoints_threshold is not None:
+                thre_mask = scores>self.keypoints_threshold
+                keypoints = keypoints[thre_mask]
+                scores = scores[thre_mask]
+                descriptors = descriptors[thre_mask]
+
+            if self.max_keypoints is not None:
+                topkind = np.argsort(-scores)[:self.max_keypoints]
+                keypoints = keypoints[topkind]
+                scores = scores[topkind]
+                descriptors = descriptors[topkind]
+
         return {"keypoints" : keypoints,
                 "scores" : scores,
-                "descriptors" : descriptors}
+                "descriptors" : descriptors,
+                "scale_factor" : (fact_i, fact_j)}
 
     def preproc_img(self, image):
 
@@ -201,3 +230,6 @@ class D2Net_local_extractor():
             resized_image = resize_fn(resized_image).astype('float')
 
         return resized_image
+
+    
+ 

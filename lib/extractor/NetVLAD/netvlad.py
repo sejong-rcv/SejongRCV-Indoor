@@ -24,7 +24,7 @@ class NetVLAD(nn.Module):
         self.dim = dim
         self.alpha = alpha
         self.normalize_input = normalize_input
-        self.conv = nn.Conv2d(dim, num_clusters, kernel_size=(1, 1), bias=False)
+        self.conv = nn.Conv2d(dim, num_clusters, kernel_size=(1, 1), bias=True)
         self.centroids = nn.Parameter(torch.rand(num_clusters, dim))
         self._init_params()
 
@@ -32,9 +32,9 @@ class NetVLAD(nn.Module):
         self.conv.weight = nn.Parameter(
             (2.0 * self.alpha * self.centroids).unsqueeze(-1).unsqueeze(-1)
         )
-        # self.conv.bias = nn.Parameter(
-        #     - self.alpha * self.centroids.norm(dim=1)
-        # )
+        self.conv.bias = nn.Parameter(
+            - self.alpha * self.centroids.norm(dim=1)
+        )
 
     def forward(self, x):
 
@@ -49,7 +49,7 @@ class NetVLAD(nn.Module):
         soft_assign = F.softmax(soft_assign, dim=1)
 
         x_flatten = x.view(N, C, -1)
-        
+
         # calculate residuals to each clusters
         residual = x_flatten.expand(self.num_clusters, -1, -1, -1).permute(1, 0, 2, 3) - \
             self.centroids.expand(x_flatten.size(-1), -1, -1).permute(1, 2, 0).unsqueeze(0)

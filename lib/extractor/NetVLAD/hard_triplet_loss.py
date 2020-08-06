@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from lib import utils as u
 
 class HardTripletLoss(nn.Module):
     """Hard/Hardest Triplet Loss
@@ -9,7 +9,7 @@ class HardTripletLoss(nn.Module):
 
     For each anchor, we get the hardest positive and hardest negative to form a triplet.
     """
-    def __init__(self, margin=0.1, hardest=False, squared=False):
+    def __init__(self, margin=0.1, hardest=False, squared=False, neg_num=1):
         """
         Args:
             margin: margin for triplet loss
@@ -21,6 +21,7 @@ class HardTripletLoss(nn.Module):
         self.margin = margin
         self.hardest = hardest
         self.squared = squared
+        self.neg_num = neg_num
 
     def forward(self, embeddings, labels, use_tuple, batch_size):
         """
@@ -43,7 +44,13 @@ class HardTripletLoss(nn.Module):
 
             triplet_loss = 0
             for emb, lab in zip(embeddings, labels):
-                triplet_loss += self.__calloss__(emb, lab)
+                pa_emb = emb[:2,:]
+                pa_lab = lab[:2]
+                n_num = emb[2:,:].shape[0]
+                for n_emb, n_lab in zip(emb[2:,:], lab[2:]):
+                    per_emb = torch.cat((pa_emb, n_emb.unsqueeze(0)), dim=0)
+                    per_lab = torch.cat((pa_lab, n_lab.unsqueeze(0)), dim=0)
+                    triplet_loss += self.__calloss__(per_emb, per_lab)
             triplet_loss /= batch_size
 
         return triplet_loss

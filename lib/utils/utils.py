@@ -12,6 +12,8 @@ from functools import wraps
 
 REAL_PATH = os.path.dirname(os.path.realpath(__file__))
 
+dd=breakpoint
+
 
 def check_path(path):
     if not os.path.exists(path):
@@ -101,6 +103,8 @@ def pickle_load(fname):
         logger.error('error loading existing database:\n{}\nstarting from an empty database'.format(e))
         db = {}
     return db
+
+
 
 
 class AverageMeter(object):

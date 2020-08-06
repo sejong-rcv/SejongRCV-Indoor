@@ -13,17 +13,19 @@ from scipy.spatial.distance import euclidean
 from pyquaternion import Quaternion
 
 from lib.datasets.transforms import *
+from lib import utils as u
 
 pd.options.mode.chained_assignment = None
 
 class Load_NMLC_indoor(torch.utils.data.Dataset):
-    def __init__(self, root_path=None, ann_path=None, transform=None, use_tuple=False):
+    def __init__(self, root_path=None, ann_path=None, transform=None, use_tuple=False, sel_pos=0, neg_num=1):
 
         self.root_path = root_path
         self.ann = pd.read_csv(ann_path) if ann_path is not None else None
         self.transform = transform
         self.use_tuple = use_tuple
-        
+        self.sel_pos = sel_pos
+        self.neg_num = neg_num
     def __len__(self):
         return len(self.ann)
 
@@ -45,21 +47,45 @@ class Load_NMLC_indoor(torch.utils.data.Dataset):
 
         return K, rdist, tdist
 
-    def __loadimg__(self, idx, plabel = 0, tflag = True):
-        
+    def __loadimg__(self, idx, plabel = 0, tflag = True, name = False, gray = False, image=True):
+
         curr_label = np.concatenate((self.ann.iloc[idx,2:-1], np.array([plabel])), axis=0).astype('float64')
         #tx ty tz qw qx qy qz plabel
         curr_id = self.ann.iloc[idx].id
         curr_folder = str(self.ann.iloc[idx].date)
-        #print(os.path.join(self.root_path, curr_folder,'images', curr_id+".jpg"))
-        #import pdb;pdb.set_trace()
-        curr_img = cv2.imread(os.path.join(self.root_path, curr_folder,'images', curr_id+".jpg"))
-
-        curr_img = cv2.cvtColor(curr_img, cv2.COLOR_BGR2RGB)
         
-        data = {'image' : curr_img, \
-                'label' : curr_label, \
-                'index' : np.array([idx])}
+        if image is True:
+            if gray is False:
+                curr_img = cv2.imread(os.path.join(self.root_path, curr_folder,'images', curr_id+".jpg"))
+            else:
+                curr_img = cv2.imread(os.path.join(self.root_path, curr_folder,'images', curr_id+".jpg"), cv2.IMREAD_GRAYSCALE)
+
+            h, w = curr_img.shape[0], curr_img.shape[1]
+            K, rdist, tdist = self.__getcameraparams__(idx)
+            if (w!=2*K[0,2]) | (h!=2*K[1,2]):
+                distCoeffs = np.array([rdist[0], rdist[1], tdist[0], tdist[1], rdist[2]])
+                curr_img = cv2.undistort(curr_img, K, distCoeffs)
+
+            if gray is False:
+                curr_img = cv2.cvtColor(curr_img, cv2.COLOR_BGR2RGB)
+                
+            if name is True:
+                floor = self.root_path.split("/")[2]
+                name_path = os.path.join(floor, curr_folder, curr_id)
+
+                data = {'image' : curr_img, \
+                        'label' : curr_label, \
+                        'index' : np.array([idx]), \
+                        'name'  : name_path}
+            else:            
+                data = {'image' : curr_img, \
+                        'label' : curr_label, \
+                        'index' : np.array([idx])}
+        else:
+            if name is True:
+                floor = self.root_path.split("/")[2]
+                name_path = os.path.join(floor, curr_folder, curr_id)
+                data = name_path
 
         if self.transform and (tflag is True):
             data = self.transform(data)
@@ -81,32 +107,43 @@ class Load_NMLC_indoor(torch.utils.data.Dataset):
         filt_y = np.union1d(filt_y1,filt_y2)
 
         filt_xy = np.intersect1d(filt_x, filt_y)
-        negind = np.random.choice(filt_xy, 1)
+        negind = np.random.choice(filt_xy, self.neg_num)
         
-        return negind.item()
+        return negind
 
     def __selectpos__(self, idx):
-        pos_list = self.ann.iloc[idx,-1:].tolist()
-        pos_list = pos_list[0].split(", ")
-        pos_list = list(map(int, pos_list))
-        posind = np.random.choice(pos_list, 1)
+        if self.sel_pos==0:
+            pos_list = self.ann.iloc[idx,-1:].tolist()
+            pos_list = pos_list[0].split(", ")
+            pos_list = list(map(int, pos_list))
+            posind = np.random.choice(pos_list, 1).item()
+        elif self.sel_pos==1:
+            posind = idx-1 if self.ann.index[-1] == idx else idx+1
+        return posind
 
-        return posind.item()
-
-    def __concatposneg__(self, anc, pos, neg):
+    def __concatposneg__(self, anc, pos, neg_set):
+        
         
         anc_img = anc['image'].unsqueeze(0)
         pos_img = pos['image'].unsqueeze(0)
-        neg_img = neg['image'].unsqueeze(0)
-        bundle_img = torch.cat((anc_img, pos_img, neg_img), dim=0)
 
         anc_lab = anc['label'].unsqueeze(0)
         pos_lab = pos['label'].unsqueeze(0)
-        neg_lab = neg['label'].unsqueeze(0)
-        bundle_lab = torch.cat((anc_lab, pos_lab, neg_lab), dim=0)
+
+        neg_img_set = torch.Tensor([])
+        neg_lab_set = torch.Tensor([]).double()
+        bundle_index = [anc['index'].item(), pos['index'].item()]
+        for i in range(len(neg_set)):
+            neg_img = neg_set[i]['image'].unsqueeze(0)
+            neg_img_set = torch.cat((neg_img_set, neg_img), dim=0)
+            neg_lab = neg_set[i]['label'].unsqueeze(0)
+            neg_lab_set = torch.cat((neg_lab_set, neg_lab), dim=0)
+            bundle_index.append(neg_set[i]['index'].item())
+
+        bundle_lab = torch.cat((anc_lab, pos_lab, neg_lab_set), dim=0)
+        bundle_img = torch.cat((anc_img, pos_img, neg_img_set), dim=0)
+        bundle_index = np.asarray(bundle_index)
   
-        bundle_index = np.array([anc['index'].item(), pos['index'].item(), neg['index'].item()])
-   
         data = {'image' : bundle_img, \
                 'label' : bundle_lab, \
                 'index' : bundle_index}
@@ -120,14 +157,17 @@ class Load_NMLC_indoor(torch.utils.data.Dataset):
         
         if self.use_tuple is False:
             return anchor
-        #import pdb;pdb.set_trace()
+
         posind = self.__selectpos__(idx)
         pos = self.__loadimg__(posind, plabel=1)
         
         negind = self.__selectneg__(idx)
-        neg = self.__loadimg__(negind, plabel=0)
+        neg_set = []
+        for ni in negind:
+            neg = self.__loadimg__(ni, plabel=0)
+            neg_set.append(neg)
 
-        apn_tuple = self.__concatposneg__(anchor, pos, neg)
+        apn_tuple = self.__concatposneg__(anchor, pos, neg_set)
 
         return apn_tuple
 
@@ -167,472 +207,13 @@ class Load_NMLC_indoor(torch.utils.data.Dataset):
                 index.extend(val['index'])
 
             index = np.asarray(index)
-                 
-
-        
+    
         data = {'image' : image,
                 'label' : label,
                 'pose' : pose, 
                 'index' : index}
 
         return data
-
-    def make_csv_v1(self, root_path, train=True, place="b1", lidar=False, make_valid=False):
-        
-        status = "train" if train is True else "test"
-   
-        if (place!='b1') and (place!='1f'):
-            raise ValueError('Write correct place')
-        
-        dfdict = {}
-
-        root_path = os.path.join(root_path, place, status)
-        subset = os.listdir(root_path)
-        subset.sort()
-
-        id_list = []
-        date_list = []
-        tx_list = []
-        ty_list = []
-        tz_list = []
-        qw_list = []
-        qx_list = []
-        qy_list = []
-        qz_list = []
-        
-
-        min_ln = len(os.listdir(os.path.join(root_path, subset[0], 'images')))
-        min_ind = 0
-        for i, sub in enumerate(subset):
-            if os.path.isdir(os.path.join(root_path, sub)) is False:
-                continue
-            if sub=='csv':
-                continue
-            
-            if min_ln > len(os.listdir(os.path.join(root_path, sub, 'images'))):
-                min_ln = len(os.listdir(os.path.join(root_path, sub, 'images')))
-                min_ind = i
-
-
-        for i,sub in enumerate(subset):
-            
-            if sub=='csv':
-                continue
-
-            if make_valid is True:
-                if i!=min_ind:
-                    continue
-            else:
-                if i==min_ind:
-                    continue
-            
-            if os.path.isdir(os.path.join(root_path, sub)) is False:
-                continue
-            print(sub)
-            h5_dict={}
-            if train is True:
-                f = h5py.File(os.path.join(root_path, sub, "jwon/groundtruth.hdf5"), 'r')
-                keys = list(f.keys())
-                for ki in range(0,len(keys),2):
-                    if keys[ki].split("_")[0] != keys[ki+1].split("_")[0]:
-                        import pdb; pdb.set_trace()
-
-                    pose = f[keys[ki]][:]
-                    stamp = f[keys[ki+1]][:]
-                    
-                    pose_stamp = np.concatenate((pose, stamp), axis=1)
-                    h5_dict.update({keys[ki].split("_")[0]:pose_stamp})
-                f.close()
-            
-           
-            for cam_name in h5_dict.keys():
-                if lidar is False:
-                    if "lidar" in cam_name:
-                        continue
-                pose = h5_dict[cam_name][:,:-1]
-                stamp = h5_dict[cam_name][:,-1].astype("int")
-
-                stamp_list = list(map(str, stamp.squeeze()))
-                pose_list = pose.tolist()
-                for pose, stamp in zip(pose_list,stamp_list):
-                    id_list.append("%s_%s"%(cam_name, stamp))
-                    date_list.append(sub)
-                    tx_list.append(pose[0])
-                    ty_list.append(pose[1])
-                    tz_list.append(pose[2])
-                    qw_list.append(pose[3])
-                    qx_list.append(pose[4])
-                    qy_list.append(pose[5])
-                    qz_list.append(pose[6])
-
-
-        print(len(id_list))
-
-        dfdict.update({'id':id_list})
-        dfdict.update({'date':date_list})
-        dfdict.update({'tx':tx_list})
-        dfdict.update({'ty':ty_list})
-        dfdict.update({'tz':tz_list})
-        dfdict.update({'qw':qw_list})
-        dfdict.update({'qx':qx_list})
-        dfdict.update({'qy':qy_list})
-        dfdict.update({'qz':qz_list})
-
-
-
-        data_csv = pd.DataFrame(dfdict)
-        if make_valid is False:
-            data_csv.to_csv("./train_"+place+".csv", index=False)
-        else:
-            data_csv.to_csv("./valid_"+place+".csv", index=False)
-        
-        
-        return
-
-    def make_csv_v2(self, root_path, train=True, place="b1", lidar=False, make_valid=False, pdeg_thr=10, pdst_thr=0.5):
-        
-        status = "train" if train is True else "test"
-   
-        if (place!='b1') and (place!='1f'):
-            raise ValueError('Write correct place')
-        
-        dfdict = {}
-
-        root_path = os.path.join(root_path, place, status)
-        subset = os.listdir(root_path)
-        subset.sort()
-
-        id_list = []
-        date_list = []
-        tx_list = []
-        ty_list = []
-        tz_list = []
-        qw_list = []
-        qx_list = []
-        qy_list = []
-        qz_list = []
-        
-
-        min_ln = len(os.listdir(os.path.join(root_path, subset[0], 'images')))
-        min_ind = 0
-        for i, sub in enumerate(subset):
-            if os.path.isdir(os.path.join(root_path, sub)) is False:
-                continue
-            if sub=='csv':
-                continue
-            
-            if min_ln > len(os.listdir(os.path.join(root_path, sub, 'images'))):
-                min_ln = len(os.listdir(os.path.join(root_path, sub, 'images')))
-                min_ind = i
-
-
-        for i,sub in enumerate(subset):
-            
-            if sub=='csv':
-                continue
-
-            if make_valid is True:
-                if i!=min_ind:
-                    continue
-            else:
-                if i==min_ind:
-                    continue
-            
-            if os.path.isdir(os.path.join(root_path, sub)) is False:
-                continue
-            
-            h5_dict={}
-            if train is True:
-                f = h5py.File(os.path.join(root_path, sub, "jwon/groundtruth.hdf5"), 'r')
-                keys = list(f.keys())
-                for ki in range(0,len(keys),2):
-                    if keys[ki].split("_")[0] != keys[ki+1].split("_")[0]:
-                        import pdb; pdb.set_trace()
-
-                    pose = f[keys[ki]][:]
-                    stamp = f[keys[ki+1]][:]
-                    
-                    pose_stamp = np.concatenate((pose, stamp), axis=1)
-                    h5_dict.update({keys[ki].split("_")[0]:pose_stamp})
-                f.close()
-            
-           
-            for cam_name in h5_dict.keys():
-                if lidar is False:
-                    if "lidar" in cam_name:
-                        continue
-                pose = h5_dict[cam_name][:,:-1]
-                stamp = h5_dict[cam_name][:,-1].astype("int")
-
-                stamp_list = list(map(str, stamp.squeeze()))
-                pose_list = pose.tolist()
-                for pose, stamp in zip(pose_list,stamp_list):
-                    id_list.append("%s_%s"%(cam_name, stamp))
-                    date_list.append(sub)
-                    tx_list.append(pose[0])
-                    ty_list.append(pose[1])
-                    tz_list.append(pose[2])
-                    qw_list.append(pose[3])
-                    qx_list.append(pose[4])
-                    qy_list.append(pose[5])
-                    qz_list.append(pose[6])
-
-        
-
-        dfdict.update({'id':id_list})
-        dfdict.update({'date':date_list})
-        dfdict.update({'tx':tx_list})
-        dfdict.update({'ty':ty_list})
-        dfdict.update({'tz':tz_list})
-        dfdict.update({'qw':qw_list})
-        dfdict.update({'qx':qx_list})
-        dfdict.update({'qy':qy_list})
-        dfdict.update({'qz':qz_list})
-
-        tx_list = np.expand_dims(np.asarray(tx_list), axis=1)
-        ty_list = np.expand_dims(np.asarray(ty_list), axis=1)
-        tz_list = np.expand_dims(np.asarray(tz_list), axis=1)
-        qw_list = np.expand_dims(np.asarray(qw_list), axis=1)
-        qx_list = np.expand_dims(np.asarray(qx_list), axis=1)
-        qy_list = np.expand_dims(np.asarray(qy_list), axis=1)
-        qz_list = np.expand_dims(np.asarray(qz_list), axis=1)
-
-        pose_array = np.concatenate((tx_list,ty_list,tz_list,qw_list,qx_list,qy_list,qz_list), axis=1)
-        
-        dsc = "__"+place+"_valid" if make_valid is True else "__"+place+"_train"
-
-        pos = []
-        tol = 0
-        viol = 0
-        for i in tqdm.tqdm(range(pose_array.shape[0]), desc=dsc):
-            xyz1 = pose_array[i,:3]
-            qwxyz1 = pose_array[i,3:]
-            subp = []
-            cnt = 0
-            for j in range(pose_array.shape[0]):
-                if i==j:
-                    continue
-                xyz2 = pose_array[j,:3]
-                qwxyz2 = pose_array[j,3:]
-                dist = self.__meterbetween__(xyz1, xyz2)
-                deg = self.__degreebetween__(qwxyz1, qwxyz2)
-
-                if (pdeg_thr>=deg) and (pdst_thr>=dist):
-                    subp.append(j)
-                    cnt+=1
-            if cnt==0:
-                
-                for j in range(pose_array.shape[0]):
-                    if i==j:
-                        continue
-                    xyz2 = pose_array[j,:3]
-                    qwxyz2 = pose_array[j,3:]
-                    dist = self.__meterbetween__(xyz1, xyz2)
-                    deg = self.__degreebetween__(qwxyz1, qwxyz2)
-
-                    if (pdeg_thr+5>=deg) and (pdst_thr*2>=dist):
-                        subp.append(j)
-                        cnt+=1
-                if cnt!=0:
-                    tol+=1
-            if cnt==0:
-                subp.append(i)
-                viol+=1
-            pos.append(np.asarray(subp))
-        
-        data_csv = pd.DataFrame(dfdict)
-
-        data_csv['pos_ind'] = "None"
-
-        if len(pos) != data_csv.shape[0]:
-            import pdb; pdb.set_trace()
-
-        for i,pos_ind in enumerate(pos):
-            str_pos = ", ".join(list(map(str,pos_ind.tolist())))
-            data_csv['pos_ind'][i] = str_pos
-
-        if make_valid is False:
-            data_csv.to_csv("./train_"+place+".csv", index=False)
-        else:
-            data_csv.to_csv("./valid_"+place+".csv", index=False)
-        
-        oby = len(pos) - tol - viol
-        return oby,tol, viol
-
-    def analysis_dataset(self):
-        alldata_b1 = db.__analysis_place__("./NaverML_indoor/", place="b1")
-        alldata_1f = db.__analysis_place__("./NaverML_indoor/", place="1f")
-
-        alldata = np.concatenate((alldata_b1, alldata_1f), axis=0)
-
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all", "b1+1f")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all", "b1+1f"))
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all", "b1+1f", "distance")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all", "b1+1f", "distance"))
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all", "b1+1f", "degree")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all", "b1+1f", "degree"))
-
-        self.__analysis_save__(alldata[:,0], os.path.join("analysis","frame_by_frame", "all", "b1+1f", "distance", "all.png"), "b1+1f", "distance")
-        self.__analysis_save__(alldata[:,1], os.path.join("analysis","frame_by_frame", "all", "b1+1f", "degree", "all.png"), "b1+1f", "degree")
-
-    def __analysis_place__(self, root_path, train=True, place="b1", lidar=False):
-        
-        status = "train" if train is True else "test"
-   
-        if (place!='b1') and (place!='1f'):
-            raise ValueError('Write correct place')
-        
-        dfdict = {}
-
-        root_path = os.path.join(root_path, place, status)
-        subset = os.listdir(root_path)
-        subset.sort()
-
-        id_list = []
-        date_list = []
-
-        
-
-        min_ln = len(os.listdir(os.path.join(root_path, subset[0], 'images')))
-        min_ind = 0
-        for i, sub in enumerate(subset):
-            if os.path.isdir(os.path.join(root_path, sub)) is False:
-                continue
-            if sub=='csv':
-                continue
-            
-            if min_ln > len(os.listdir(os.path.join(root_path, sub, 'images'))):
-                min_ln = len(os.listdir(os.path.join(root_path, sub, 'images')))
-                min_ind = i
-
-        if os.path.isdir("analysis") is False:
-            os.mkdir("analysis")
-        if os.path.isdir(os.path.join("analysis","frame_by_frame")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame"))
-        anlys_set = {}
-        for i,sub in enumerate(subset):
-            
-            type_name="train"
-
-            if sub=='csv':
-                continue
-            if i==min_ind:
-                type_name="valid"
-            if os.path.isdir(os.path.join(root_path, sub)) is False:
-                continue
-            
-            if os.path.isdir(os.path.join("analysis","frame_by_frame", place)) is False:
-                os.mkdir(os.path.join("analysis","frame_by_frame", place))
-            if os.path.isdir(os.path.join("analysis","frame_by_frame", place, sub)) is False:
-                os.mkdir(os.path.join("analysis","frame_by_frame", place, sub))
-            if os.path.isdir(os.path.join("analysis","frame_by_frame", place, sub, "distance")) is False:
-                os.mkdir(os.path.join("analysis","frame_by_frame", place, sub, "distance"))
-            if os.path.isdir(os.path.join("analysis","frame_by_frame", place, sub, "degree")) is False:
-                os.mkdir(os.path.join("analysis","frame_by_frame", place, sub, "degree"))
-
-
-
-            h5_dict={}
-            if train is True:
-                f = h5py.File(os.path.join(root_path, sub, "jwon/groundtruth.hdf5"), 'r')
-                keys = list(f.keys())
-                for ki in range(0,len(keys),2):
-                    if keys[ki].split("_")[0] != keys[ki+1].split("_")[0]:
-                        import pdb; pdb.set_trace()
-
-                    pose = f[keys[ki]][:]
-                    stamp = f[keys[ki+1]][:]
-                    
-                    pose_stamp = np.concatenate((pose, stamp), axis=1)
-                    h5_dict.update({keys[ki].split("_")[0]:pose_stamp})
-                f.close()
-            
-            anlys_cam = {}
-            for cam_name in h5_dict.keys():
-                if lidar is False:
-                    if "lidar" in cam_name:
-                        continue
-                pose = h5_dict[cam_name][:,:-1]
-                stamp = h5_dict[cam_name][:,-1].astype("int")
-                
-                ind = np.argsort(stamp)
-                stamp = stamp[ind]
-                pose = pose[ind]
-
-                dist_list = []
-                deg_list = []
-                for i in range(0, len(stamp)-1):
-                    xyz1 = pose[i, :3]
-                    xyz2 = pose[i+1, :3]
-
-                    qwxyz1 = pose[i, 3:]
-                    qwxyz2 = pose[i+1, 3:]
-
-                    dist = self.__meterbetween__(xyz1, xyz2)
-                    deg = self.__degreebetween__(qwxyz1, qwxyz2)
-
-                    dist_list.append(dist)
-                    deg_list.append(deg)
-                
-                dist_list = np.expand_dims(np.asarray(dist_list), axis=1)
-                deg_list = np.expand_dims(np.asarray(deg_list), axis=1)
-                dide_list = np.concatenate((dist_list, deg_list), axis=1)
-                anlys_cam.update({cam_name:dide_list})
-
-                self.__analysis_save__(dide_list[:,0], os.path.join("analysis","frame_by_frame", place, sub, "distance", type_name+"_"+cam_name+".png"), place, "distance")
-                self.__analysis_save__(dide_list[:,1], os.path.join("analysis","frame_by_frame", place, sub, "degree", type_name+"_"+cam_name+".png"), place, "degree")
-
-
-            anlys_set.update({sub : anlys_cam})
-
-        # index 0: distance, 1: degree
-        alldata = []
-        for set_key, set_val in anlys_set.items():
-            for key, val in set_val.items():
-                alldata.extend(val.tolist())
-        alldata = np.asarray(alldata)
-
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all"))
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all", place)) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all", place))
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all", place, "distance")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all", place, "distance"))
-        if os.path.isdir(os.path.join("analysis","frame_by_frame", "all", place, "degree")) is False:
-            os.mkdir(os.path.join("analysis","frame_by_frame", "all", place, "degree"))
-
-        self.__analysis_save__(alldata[:,0], os.path.join("analysis","frame_by_frame", "all", place, "distance", "all.png"), place, "distance")
-        self.__analysis_save__(alldata[:,1], os.path.join("analysis","frame_by_frame", "all", place, "degree", "all.png"), place, "degree")
-        
-        return alldata
-
-    def __analysis_save__(self, data, path, place, typ="degree"):
-        import matplotlib.pyplot as plt 
-        plt.figure(figsize=(10, 6))
-        ys, xs, pathces = plt.hist(data, bins=10, rwidth=0.8)
- 
-        ysp = ys / ys.sum()
-
-        for i in range(0, len(ys)):
-            plt.text(x=xs[i]+0.08, y=ys[i]+0.15, 
-                    s='{:0>.2f}%'.format(ysp[i]*100), 
-                    fontproperties='serif', 
-                    fontsize=10,
-                    color='red')
-        y_min, y_max = plt.ylim()
-
-        plt.ylim(y_min, y_max+0.5)
-        if typ=="degree":
-            plt.xticks([(xs[i]+xs[i+1])/2 for i in range(0, len(xs)-1)], 
-                ["{:d} ~ {:d}".format(int(xs[i]), int(xs[i+1])) for i in range(0, len(xs)-1)], fontsize=8)
-            plt.xlabel("degree")
-        else:
-            plt.xticks([(xs[i]+xs[i+1])/2 for i in range(0, len(xs)-1)], 
-                ["{:.1f} ~ {:.1f}".format(xs[i], xs[i+1]) for i in range(0, len(xs)-1)], fontsize=8)
-            plt.xlabel("meter")
-        plt.title(place)
-        plt.savefig(path)
-        plt.close()
 
     def __meterbetween__(self, xyz1, xyz2):
         return euclidean(xyz1, xyz2)
@@ -657,7 +238,6 @@ class Load_NMLC_indoor(torch.utils.data.Dataset):
         r = Rotation.from_quat(pose[3:])
         mat = r.as_rotvec()
         pose_matrix[:3, :3] = mat
-        
         
         return pose_matrix
 
@@ -702,3 +282,4 @@ class Load_NMLC_indoor(torch.utils.data.Dataset):
 
                         out.write(curr_img)
                     out.release()             
+

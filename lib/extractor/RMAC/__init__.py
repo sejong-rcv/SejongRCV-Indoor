@@ -61,7 +61,7 @@ def create_model(arch, pretrained='', delete_fc=False, *args, **kwargs):
         import sys
         sys.modules['utils.watcher'] = watcher
         weights = torch.load(pretrained, map_location=lambda storage, loc: storage)['state_dict']
-        print("Load R-Mac Pretrained")
+        
         load_pretrained_weights(model, weights, delete_fc=delete_fc)
 
     elif pretrained:
@@ -90,7 +90,7 @@ def load_pretrained_weights(net, state_dict, delete_fc=False):
                 print("Loading weights for %s: Missing layer %s" % (type(net).__name__, k))
             new_dict[k] = v
         elif v.shape != new_dict[k].shape:
-            print("Loading weights for %s: Bad shape for layer %s, skipping" % (type(net).__name__, k))
+            # print("Loading weights for %s: Bad shape for layer %s, skipping" % (type(net).__name__, k))
             new_dict[k] = v
 
     net.load_state_dict(new_dict)

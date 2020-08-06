@@ -42,7 +42,7 @@ class Resize(object):
 
         new_h, new_w = int(new_h), int(new_w)
         
-        img = cv2.resize(image, (new_h, new_w))
+        img = cv2.resize(image, (new_w, new_h))
 
         if isinstance(data, dict):
             data['image'] = img
