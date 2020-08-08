@@ -497,9 +497,8 @@ def extractor(args):
         apgem = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet-101-AP-GeM.pt",without_fc=False).cuda()
         apgem_lm18 = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet101-AP-GeM-LM18.pt",without_fc=False).cuda()
 
-        d2 = ex.D2Net(model_file="./arxiv/d2_tf.pth").dense_feature_extraction
-        netvlad = ex.NetVLAD(num_clusters=args.cluster, dim=512, alpha=1.0)
-        d2_netvlad = ex.EmbedNet(d2, netvlad).cuda()
+        ckpt = torch.load("./arxiv/D2_NetVLAD_traino_epoch024.pth.tar") # cluster 64
+        d2_netvlad = ckpt['model']
 
         ext = ex.Ensemble3(apgem, apgem_lm18, d2_netvlad, is_backbone1=False, is_backbone2=False, is_backbone3=False).cuda()
 
@@ -508,25 +507,8 @@ def extractor(args):
         apgem = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet-101-AP-GeM.pt",without_fc=False).cuda()
         apgem_lm18 = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet101-AP-GeM-LM18.pt",without_fc=False).cuda()
 
-        encoder = vgg16(pretrained=True)
-        layers = list(encoder.features.children())[:-2]
-        for l in layers[:-5]: 
-            for p in l.parameters():
-                p.requires_grad = False
-        base_model = nn.Sequential(*layers)
-        dim = list(base_model.parameters())[-1].shape[0]
-        netvlad = ex.NetVLAD(num_clusters=args.cluster, dim=dim, alpha=1.0)
-        pitts_netvlad = ex.EmbedNet(base_model, netvlad).cuda()
-        
-        pittsburgh = torch.load("./arxiv/Pittsburgh_NetVLAD.pth.tar")
-        pittsburgh_dict = pittsburgh['state_dict']
-
-        pitts_netvlad_dict = pitts_netvlad.state_dict()
-        for (key_t, val_t), (key_s, val_s) in zip(pitts_netvlad_dict.items(), pittsburgh_dict.items()):
-            if key_t.split('.')[1]!=key_s.split('.')[1]:
-                raise ValueError("Please check pittsburgh weight!")
-            pitts_netvlad_dict[key_t] = val_s
-        pitts_netvlad.load_state_dict(pitts_netvlad_dict)
+        ckpt = torch.load("./arxiv/Pitts_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        pitts_netvlad = ckpt['model']
 
         ext = ex.Ensemble3(apgem, apgem_lm18, pitts_netvlad, is_backbone1=False, is_backbone2=False, is_backbone3=False).cuda()
 
@@ -569,36 +551,35 @@ def train_handcraft(args, train_loader, valid_loader, index_loader, valid_datase
     start_epoch = 0
     
     if args.ckpt_path is not None:
-        ckpt = torch.load(args.ckpt_path)
-        ext = ckpt['model']
-    
+        ext.load(args.ckpt_path)
+    else:
 
-    batch_time = u.AverageMeter()
-    data_time = u.AverageMeter()
-    start = time.time()
-    pbar = tqdm.tqdm(enumerate(train_loader), desc="Extract local descriptor!")
+        batch_time = u.AverageMeter()
+        data_time = u.AverageMeter()
+        start = time.time()
+        pbar = tqdm.tqdm(enumerate(train_loader), desc="Extract local descriptor!")
 
-    if args.train is True:
-        for batch_i, data in pbar:
+        if args.train is True:
+            for batch_i, data in pbar:
 
-            data_time.update(time.time() - start)
-            start = time.time()
+                data_time.update(time.time() - start)
+                start = time.time()
 
-            ext.extract_ld(data)
+                ext.extract_ld(data)
+                
+                batch_time.update(time.time() - start)
+                start = time.time()
 
-            batch_time.update(time.time() - start)
-            start = time.time()
+                state_msg = (
+                    'Data time: {:0.5f}; Batch time: {:0.5f};'.format(data_time.avg, batch_time.avg)
+                )
 
-            state_msg = (
-                'Data time: {:0.5f}; Batch time: {:0.5f};'.format(data_time.avg, batch_time.avg)
-            )
-
-            pbar.set_description(state_msg)
-        
-        ext.build_voca()
-        ext.extract_vlad()
-        filename = os.path.join(save_root, 'ckpt', 'checkpoint.pkl')
-        ext.save(filename)
+                pbar.set_description(state_msg)
+            
+            ext.build_voca(k=args.cluster)
+            ext.extract_vlad()
+            filename = os.path.join(save_root, 'ckpt', 'checkpoint.pkl')
+            ext.save(filename)
 
     
     if (args.valid is True) or (args.valid_sample is True):
@@ -609,11 +590,7 @@ def train_handcraft(args, train_loader, valid_loader, index_loader, valid_datase
 
         indexdb, validdb = ext.get_data()
 
-
-        if args.metric == 0:
-            ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, 0, os.path.join(save_root, "result"))
-        elif args.metric == 1:
-            ldm = mt.LocThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, 0, os.path.join(save_root, "result"))
+        ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, 0, os.path.join(save_root, "result"))
     return 
 
 @u.timer
@@ -630,7 +607,7 @@ def train(args, train_loader, valid_loader, index_loader, valid_dataset, index_d
         ckpt = torch.load(args.ckpt_path)
         ext = ckpt['model']
         optim = ckpt['optimizer']
-        start_epoch = ckpt['epoch']
+        start_epoch = ckpt['epoch']+1
   
     for epoch in range(start_epoch,args.epochs):
         ext.train()
@@ -660,6 +637,8 @@ def train(args, train_loader, valid_loader, index_loader, valid_dataset, index_d
                 start = time.time()
 
                 output = ext(image)
+                if output.dim()==1:
+                    output = output.unsqueeze(0)
 
                 loss = crt(output, label, args.tuple, args.batch)
 
@@ -695,8 +674,7 @@ def train(args, train_loader, valid_loader, index_loader, valid_dataset, index_d
             
             
             if (args.db_load is not None):
-                file_name = os.path.join("./arxiv", args.db_load)
-                with open(file_name, "rb") as a_file:
+                with open(args.db_load, "rb") as a_file:
                     indexdb = pickle.load(a_file)
             else:
                 # #index
@@ -705,23 +683,24 @@ def train(args, train_loader, valid_loader, index_loader, valid_dataset, index_d
             #valid
             validdb = make_inferDBandPredict(args, valid_loader, ext, epoch, tp='valid')
 
+            if args.db_load is None:
+                if args.pca is True:
+                    pca = pp.PCAwhitening(pca_dim=args.pca_dim, pca_whitening=True)
+                    indexdb['feat'] = pca.fit_transform(indexdb['feat'])      
+                    validdb['feat'] = pca.transform(validdb['feat']) 
+
             if (args.db_save is not None):
-                if os.path.isdir("./arxiv") is False:
-                    os.mkdir("./arxiv")
-                file_name = os.path.join("./arxiv", args.db_save)
-                if os.path.isfile(file_name) is True:
-                    os.remove(file_name)
-                a_file = open(file_name, "wb")
+                if os.path.isfile(args.db_save) is True:
+                    os.remove(args.db_save)
+                a_file = open(args.db_save, "wb")
                 pickle.dump(indexdb, a_file)
                 a_file.close()
 
 
-            if args.pca is True:
-                pca = pp.PCAwhitening(pca_dim=args.pca_dim, pca_whitening=True)
-                indexdb['feat'] = pca.fit_transform(indexdb['feat'])      
-                validdb['feat'] = pca.transform(validdb['feat']) 
-
             ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, epoch, os.path.join(save_root, "result"))
+
+            if args.train is False:
+                return
 
             if args.qualitative:
                 return
@@ -740,8 +719,7 @@ def test(args, test_loader, index_loader, test_dataset, index_dataset, save_root
         ext = ckpt['model']
     
     if (args.db_load is not None):
-        file_name = os.path.join("./arxiv", args.db_load)
-        with open(file_name, "rb") as a_file:
+        with open(args.db_load, "rb") as a_file:
             indexdb = pickle.load(a_file)
     else:
         # #index
@@ -751,12 +729,10 @@ def test(args, test_loader, index_loader, test_dataset, index_dataset, save_root
     testdb = make_inferDBandPredict(args, test_loader, ext, 0, tp='test')   
     
     if (args.db_save is not None):
-        if os.path.isdir("./arxiv") is False:
-            os.mkdir("./arxiv")
-        file_name = os.path.join("./arxiv", args.db_save)
-        if os.path.isfile(file_name) is True:
-            os.remove(file_name)
-        a_file = open(file_name, "wb")
+
+        if os.path.isfile(args.db_save) is True:
+            os.remove(args.db_save)
+        a_file = open(args.db_save, "wb")
         pickle.dump(indexdb, a_file)
         a_file.close()
     
@@ -797,6 +773,8 @@ def make_inferDBandPredict(args, loader, ext, epoch, tp='index'):
             index = data['index']
             
             output = ext(image)
+            if output.dim()==1:
+                output = output.unsqueeze(0)
 
             featdb.extend(output.detach().cpu().numpy())
             labeldb.extend(label.detach().cpu().numpy())

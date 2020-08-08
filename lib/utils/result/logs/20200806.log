@@ -1,0 +1,1409 @@
+[2020-08-06 11:19:42,870][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:19:42,870][INFO] |                              time = 20200806-201942                   |
+[2020-08-06 11:19:42,870][INFO] |                              seed = 42                                |
+[2020-08-06 11:19:42,870][INFO] |                              port = 8823                              |
+[2020-08-06 11:19:42,870][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:19:42,870][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:19:42,870][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:19:42,870][INFO] |                             batch = 1                                 |
+[2020-08-06 11:19:42,870][INFO] |                           shuffle = False                             |
+[2020-08-06 11:19:42,870][INFO] |                           workers = 4                                 |
+[2020-08-06 11:19:42,870][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:19:42,870][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:19:42,871][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:19:42,871][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:19:42,871][INFO] |                         ckpt_path = None                              |
+[2020-08-06 11:19:42,871][INFO] |                       save_folder = ablation-D2_NetVLAD-trainX        |
+[2020-08-06 11:19:42,871][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:19:42,871][INFO] |                             train = False                             |
+[2020-08-06 11:19:42,871][INFO] |                              test = False                             |
+[2020-08-06 11:19:42,871][INFO] |                             valid = False                             |
+[2020-08-06 11:19:42,871][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:19:42,871][INFO] |                       qualitative = False                             |
+[2020-08-06 11:19:42,871][INFO] |                           cluster = 64                                |
+[2020-08-06 11:19:42,871][INFO] |                               pca = False                             |
+[2020-08-06 11:19:42,871][INFO] |                           pca_dim = None                              |
+[2020-08-06 11:19:42,871][INFO] |                             tuple = False                             |
+[2020-08-06 11:19:42,871][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:19:42,871][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:19:42,871][INFO] |                              topk = 100                               |
+[2020-08-06 11:19:42,871][INFO] |                           db_save = ablation-D2_NetVLAD-trainX.pkl    |
+[2020-08-06 11:19:42,871][INFO] |                           db_load = None                              |
+[2020-08-06 11:19:42,871][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:19:42,872][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:19:42,872][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:19:42,872][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:19:42,872][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:19:42,872][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:19:42,872][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:19:42,872][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:19:42,872][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:19:42,872][INFO] |                         topk_load = None                              |
+[2020-08-06 11:19:42,872][INFO] |                         topk_save = ablation-D2_NetVLAD-trainX.npy    |
+[2020-08-06 11:19:42,872][INFO] |                                qe = None                              |
+[2020-08-06 11:19:42,872][INFO] |                            rerank = None                              |
+[2020-08-06 11:19:42,872][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:19:42,872][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:19:42,872][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:19:42,872][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:19:42,881][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:19:42,881][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 11:19:42,881][INFO] |                         handcraft = None                              |
+[2020-08-06 11:19:42,881][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:19:42,882][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:19:42,882][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:19:47,320][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:19:47,320][INFO] |                              time = 20200806-201947                   |
+[2020-08-06 11:19:47,320][INFO] |                              seed = 42                                |
+[2020-08-06 11:19:47,320][INFO] |                              port = 8823                              |
+[2020-08-06 11:19:47,320][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:19:47,320][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:19:47,320][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:19:47,321][INFO] |                             batch = 1                                 |
+[2020-08-06 11:19:47,321][INFO] |                           shuffle = False                             |
+[2020-08-06 11:19:47,321][INFO] |                           workers = 4                                 |
+[2020-08-06 11:19:47,321][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:19:47,321][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:19:47,321][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:19:47,321][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:19:47,321][INFO] |                         ckpt_path = None                              |
+[2020-08-06 11:19:47,321][INFO] |                       save_folder = ablation-Pitts_NetVLAD-trainX     |
+[2020-08-06 11:19:47,321][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:19:47,321][INFO] |                             train = False                             |
+[2020-08-06 11:19:47,321][INFO] |                              test = False                             |
+[2020-08-06 11:19:47,321][INFO] |                             valid = False                             |
+[2020-08-06 11:19:47,321][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:19:47,321][INFO] |                       qualitative = False                             |
+[2020-08-06 11:19:47,321][INFO] |                           cluster = 64                                |
+[2020-08-06 11:19:47,321][INFO] |                               pca = False                             |
+[2020-08-06 11:19:47,322][INFO] |                           pca_dim = None                              |
+[2020-08-06 11:19:47,322][INFO] |                             tuple = False                             |
+[2020-08-06 11:19:47,322][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:19:47,322][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:19:47,322][INFO] |                              topk = 100                               |
+[2020-08-06 11:19:47,322][INFO] |                           db_save = ablation-Pitts_NetVLAD-trainX.pkl |
+[2020-08-06 11:19:47,322][INFO] |                           db_load = None                              |
+[2020-08-06 11:19:47,322][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:19:47,322][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:19:47,322][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:19:47,322][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:19:47,322][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:19:47,322][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:19:47,322][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:19:47,322][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:19:47,322][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:19:47,322][INFO] |                         topk_load = None                              |
+[2020-08-06 11:19:47,323][INFO] |                         topk_save = ablation-Pittss_NetVLAD-trainX.npy |
+[2020-08-06 11:19:47,323][INFO] |                                qe = None                              |
+[2020-08-06 11:19:47,323][INFO] |                            rerank = None                              |
+[2020-08-06 11:19:47,323][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:19:47,323][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:19:47,323][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:19:47,323][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:19:47,323][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:19:47,323][INFO] |                         extractor = Pitts_NetVLAD                     |
+[2020-08-06 11:19:47,323][INFO] |                         handcraft = None                              |
+[2020-08-06 11:19:47,323][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:19:47,323][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:19:47,323][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:19:51,693][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:19:51,693][INFO] |                              time = 20200806-201951                   |
+[2020-08-06 11:19:51,693][INFO] |                              seed = 42                                |
+[2020-08-06 11:19:51,694][INFO] |                              port = 8823                              |
+[2020-08-06 11:19:51,694][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:19:51,694][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:19:51,694][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:19:51,694][INFO] |                             batch = 1                                 |
+[2020-08-06 11:19:51,694][INFO] |                           shuffle = False                             |
+[2020-08-06 11:19:51,694][INFO] |                           workers = 4                                 |
+[2020-08-06 11:19:51,694][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:19:51,694][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:19:51,694][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:19:51,694][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:19:51,694][INFO] |                         ckpt_path = None                              |
+[2020-08-06 11:19:51,694][INFO] |                       save_folder = ablation-Ensemble-APGeM+APGeM_LM18+D2_NetVLAD |
+[2020-08-06 11:19:51,694][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:19:51,694][INFO] |                             train = False                             |
+[2020-08-06 11:19:51,694][INFO] |                              test = False                             |
+[2020-08-06 11:19:51,695][INFO] |                             valid = False                             |
+[2020-08-06 11:19:51,695][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:19:51,695][INFO] |                       qualitative = False                             |
+[2020-08-06 11:19:51,695][INFO] |                           cluster = 64                                |
+[2020-08-06 11:19:51,695][INFO] |                               pca = False                             |
+[2020-08-06 11:19:51,695][INFO] |                           pca_dim = None                              |
+[2020-08-06 11:19:51,695][INFO] |                             tuple = False                             |
+[2020-08-06 11:19:51,695][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:19:51,695][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:19:51,695][INFO] |                              topk = 100                               |
+[2020-08-06 11:19:51,695][INFO] |                           db_save = ablation-Ensemble-APGeM+APGeM_LM18+D2_NetVLAD.pkl |
+[2020-08-06 11:19:51,695][INFO] |                           db_load = None                              |
+[2020-08-06 11:19:51,695][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:19:51,695][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:19:51,695][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:19:51,695][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:19:51,695][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:19:51,695][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:19:51,696][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:19:51,696][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:19:51,696][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:19:51,696][INFO] |                         topk_load = None                              |
+[2020-08-06 11:19:51,696][INFO] |                         topk_save = ablation-Ensemble-APGeM+APGeM_LM18+D2_NetVLAD.npy |
+[2020-08-06 11:19:51,696][INFO] |                                qe = None                              |
+[2020-08-06 11:19:51,696][INFO] |                            rerank = None                              |
+[2020-08-06 11:19:51,696][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:19:51,696][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:19:51,696][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:19:51,696][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:19:51,696][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:19:51,696][INFO] |                         extractor = Ensemble(APGeM + APGeM_LM18 + D2_NetVLAD) |
+[2020-08-06 11:19:51,696][INFO] |                         handcraft = None                              |
+[2020-08-06 11:19:51,696][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:19:51,696][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:19:51,696][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:22:28,765][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:22:28,765][INFO] |                              time = 20200806-202228                   |
+[2020-08-06 11:22:28,765][INFO] |                              seed = 42                                |
+[2020-08-06 11:22:28,765][INFO] |                              port = 8823                              |
+[2020-08-06 11:22:28,765][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:22:28,765][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:22:28,765][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:22:28,765][INFO] |                             batch = 1                                 |
+[2020-08-06 11:22:28,765][INFO] |                           shuffle = False                             |
+[2020-08-06 11:22:28,766][INFO] |                           workers = 4                                 |
+[2020-08-06 11:22:28,766][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:22:28,766][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:22:28,766][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:22:28,766][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:22:28,766][INFO] |                         ckpt_path = None                              |
+[2020-08-06 11:22:28,766][INFO] |                       save_folder = ablation-D2_NetVLAD-trainX        |
+[2020-08-06 11:22:28,766][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:22:28,766][INFO] |                             train = False                             |
+[2020-08-06 11:22:28,766][INFO] |                              test = False                             |
+[2020-08-06 11:22:28,766][INFO] |                             valid = False                             |
+[2020-08-06 11:22:28,766][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:22:28,766][INFO] |                       qualitative = False                             |
+[2020-08-06 11:22:28,766][INFO] |                           cluster = 64                                |
+[2020-08-06 11:22:28,766][INFO] |                               pca = False                             |
+[2020-08-06 11:22:28,766][INFO] |                           pca_dim = None                              |
+[2020-08-06 11:22:28,766][INFO] |                             tuple = False                             |
+[2020-08-06 11:22:28,766][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:22:28,766][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:22:28,766][INFO] |                              topk = 100                               |
+[2020-08-06 11:22:28,767][INFO] |                           db_save = ablation-D2_NetVLAD-trainX.pkl    |
+[2020-08-06 11:22:28,767][INFO] |                           db_load = None                              |
+[2020-08-06 11:22:28,767][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:22:28,767][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:22:28,767][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:22:28,767][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:22:28,767][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:22:28,767][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:22:28,767][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:22:28,767][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:22:28,767][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:22:28,767][INFO] |                         topk_load = None                              |
+[2020-08-06 11:22:28,767][INFO] |                         topk_save = ablation-D2_NetVLAD-trainX.npy    |
+[2020-08-06 11:22:28,767][INFO] |                                qe = None                              |
+[2020-08-06 11:22:28,767][INFO] |                            rerank = None                              |
+[2020-08-06 11:22:28,767][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:22:28,767][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:22:28,767][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:22:28,767][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:22:28,767][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:22:28,768][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 11:22:28,768][INFO] |                         handcraft = None                              |
+[2020-08-06 11:22:28,768][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:22:28,768][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:22:28,768][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:22:28,956][INFO] Running time [ params_show ]: 0.191 sec
+[2020-08-06 11:22:28,956][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 11:22:28,979][INFO] Running time [ run_tensorboard ]: 0.023 sec
+[2020-08-06 11:22:30,680][INFO] Running time [ load_data ]: 1.701 sec
+[2020-08-06 11:22:39,162][INFO] Running time [ extractor ]: 8.234 sec
+[2020-08-06 11:22:39,162][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 11:22:39,162][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 11:22:39,162][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 11:22:48,168][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:22:48,168][INFO] |                              time = 20200806-202248                   |
+[2020-08-06 11:22:48,169][INFO] |                              seed = 42                                |
+[2020-08-06 11:22:48,169][INFO] |                              port = 8823                              |
+[2020-08-06 11:22:48,169][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:22:48,169][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:22:48,169][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:22:48,169][INFO] |                             batch = 1                                 |
+[2020-08-06 11:22:48,169][INFO] |                           shuffle = False                             |
+[2020-08-06 11:22:48,169][INFO] |                           workers = 4                                 |
+[2020-08-06 11:22:48,169][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:22:48,169][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:22:48,169][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:22:48,169][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:22:48,169][INFO] |                         ckpt_path = ./jobs/capstone2020/20200527-015656_D2+NetVLAD_top10/ckpt/checkpoint_subset000_epoch024.pth.tar |
+[2020-08-06 11:22:48,169][INFO] |                       save_folder = ablation-D2_NetVLAD-trainO        |
+[2020-08-06 11:22:48,169][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:22:48,169][INFO] |                             train = False                             |
+[2020-08-06 11:22:48,169][INFO] |                              test = False                             |
+[2020-08-06 11:22:48,170][INFO] |                             valid = False                             |
+[2020-08-06 11:22:48,170][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:22:48,170][INFO] |                       qualitative = False                             |
+[2020-08-06 11:22:48,170][INFO] |                           cluster = 64                                |
+[2020-08-06 11:22:48,170][INFO] |                               pca = False                             |
+[2020-08-06 11:22:48,170][INFO] |                           pca_dim = None                              |
+[2020-08-06 11:22:48,170][INFO] |                             tuple = False                             |
+[2020-08-06 11:22:48,170][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:22:48,170][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:22:48,170][INFO] |                              topk = 100                               |
+[2020-08-06 11:22:48,170][INFO] |                           db_save = ablation-D2_NetVLAD-trainO.pkl    |
+[2020-08-06 11:22:48,170][INFO] |                           db_load = None                              |
+[2020-08-06 11:22:48,170][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:22:48,170][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:22:48,170][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:22:48,170][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:22:48,170][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:22:48,170][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:22:48,171][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:22:48,171][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:22:48,171][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:22:48,171][INFO] |                         topk_load = None                              |
+[2020-08-06 11:22:48,171][INFO] |                         topk_save = ablation-D2_NetVLAD-trainO.npy    |
+[2020-08-06 11:22:48,171][INFO] |                                qe = None                              |
+[2020-08-06 11:22:48,171][INFO] |                            rerank = None                              |
+[2020-08-06 11:22:48,171][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:22:48,171][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:22:48,171][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:22:48,171][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:22:48,171][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:22:48,171][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 11:22:48,171][INFO] |                         handcraft = None                              |
+[2020-08-06 11:22:48,171][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:22:48,171][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:22:48,171][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:22:48,311][INFO] Running time [ params_show ]: 0.143 sec
+[2020-08-06 11:22:48,311][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 11:22:48,330][INFO] Running time [ run_tensorboard ]: 0.019 sec
+[2020-08-06 11:22:49,549][INFO] Running time [ load_data ]: 1.218 sec
+[2020-08-06 11:22:56,974][INFO] Running time [ extractor ]: 7.202 sec
+[2020-08-06 11:22:56,974][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 11:22:56,975][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 11:22:56,975][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 11:23:01,098][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:23:01,099][INFO] |                              time = 20200806-202301                   |
+[2020-08-06 11:23:01,099][INFO] |                              seed = 42                                |
+[2020-08-06 11:23:01,099][INFO] |                              port = 8823                              |
+[2020-08-06 11:23:01,099][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:23:01,099][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:23:01,099][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:23:01,099][INFO] |                             batch = 1                                 |
+[2020-08-06 11:23:01,099][INFO] |                           shuffle = False                             |
+[2020-08-06 11:23:01,099][INFO] |                           workers = 4                                 |
+[2020-08-06 11:23:01,099][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:23:01,099][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:23:01,099][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:23:01,099][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:23:01,099][INFO] |                         ckpt_path = None                              |
+[2020-08-06 11:23:01,100][INFO] |                       save_folder = ablation-D2_NetVLAD-trainX-pca4096 |
+[2020-08-06 11:23:01,100][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:23:01,100][INFO] |                             train = False                             |
+[2020-08-06 11:23:01,100][INFO] |                              test = False                             |
+[2020-08-06 11:23:01,100][INFO] |                             valid = False                             |
+[2020-08-06 11:23:01,100][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:23:01,100][INFO] |                       qualitative = False                             |
+[2020-08-06 11:23:01,100][INFO] |                           cluster = 64                                |
+[2020-08-06 11:23:01,100][INFO] |                               pca = True                              |
+[2020-08-06 11:23:01,100][INFO] |                           pca_dim = 4096                              |
+[2020-08-06 11:23:01,100][INFO] |                             tuple = False                             |
+[2020-08-06 11:23:01,100][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:23:01,100][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:23:01,100][INFO] |                              topk = 100                               |
+[2020-08-06 11:23:01,100][INFO] |                           db_save = ablation-D2_NetVLAD-trainX-pca4096.pkl |
+[2020-08-06 11:23:01,100][INFO] |                           db_load = None                              |
+[2020-08-06 11:23:01,100][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:23:01,100][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:23:01,101][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:23:01,101][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:23:01,101][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:23:01,101][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:23:01,101][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:23:01,101][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:23:01,101][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:23:01,101][INFO] |                         topk_load = None                              |
+[2020-08-06 11:23:01,101][INFO] |                         topk_save = ablation-D2_NetVLAD-trainX-pca4096.npy |
+[2020-08-06 11:23:01,101][INFO] |                                qe = None                              |
+[2020-08-06 11:23:01,101][INFO] |                            rerank = None                              |
+[2020-08-06 11:23:01,101][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:23:01,101][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:23:01,101][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:23:01,101][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:23:01,101][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:23:01,101][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 11:23:01,102][INFO] |                         handcraft = None                              |
+[2020-08-06 11:23:01,102][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:23:01,102][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:23:01,102][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:23:01,260][INFO] Running time [ params_show ]: 0.162 sec
+[2020-08-06 11:23:01,261][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 11:23:01,301][INFO] Running time [ run_tensorboard ]: 0.039 sec
+[2020-08-06 11:23:02,638][INFO] Running time [ load_data ]: 1.337 sec
+[2020-08-06 11:23:10,328][INFO] Running time [ extractor ]: 7.439 sec
+[2020-08-06 11:23:10,328][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 11:23:10,328][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 11:23:10,329][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 11:23:15,240][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 11:23:15,241][INFO] |                              time = 20200806-202315                   |
+[2020-08-06 11:23:15,241][INFO] |                              seed = 42                                |
+[2020-08-06 11:23:15,241][INFO] |                              port = 8823                              |
+[2020-08-06 11:23:15,241][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 11:23:15,241][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:23:15,241][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 11:23:15,241][INFO] |                             batch = 1                                 |
+[2020-08-06 11:23:15,241][INFO] |                           shuffle = False                             |
+[2020-08-06 11:23:15,241][INFO] |                           workers = 4                                 |
+[2020-08-06 11:23:15,241][INFO] |                            epochs = 1000                              |
+[2020-08-06 11:23:15,241][INFO] |                                lr = 0.0001                            |
+[2020-08-06 11:23:15,241][INFO] |                     save_interval = 1                                 |
+[2020-08-06 11:23:15,241][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 11:23:15,242][INFO] |                         ckpt_path = None                              |
+[2020-08-06 11:23:15,242][INFO] |                       save_folder = ablation-APGeM_LM18               |
+[2020-08-06 11:23:15,242][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 11:23:15,242][INFO] |                             train = False                             |
+[2020-08-06 11:23:15,242][INFO] |                              test = False                             |
+[2020-08-06 11:23:15,242][INFO] |                             valid = False                             |
+[2020-08-06 11:23:15,242][INFO] |                      valid_sample = True                              |
+[2020-08-06 11:23:15,242][INFO] |                       qualitative = False                             |
+[2020-08-06 11:23:15,242][INFO] |                           cluster = 64                                |
+[2020-08-06 11:23:15,242][INFO] |                               pca = False                             |
+[2020-08-06 11:23:15,242][INFO] |                           pca_dim = None                              |
+[2020-08-06 11:23:15,242][INFO] |                             tuple = False                             |
+[2020-08-06 11:23:15,242][INFO] |                           neg_num = 1                                 |
+[2020-08-06 11:23:15,242][INFO] |                          cen_crop = False                             |
+[2020-08-06 11:23:15,242][INFO] |                              topk = 100                               |
+[2020-08-06 11:23:15,242][INFO] |                           db_save = ablation-APGeM_LM18.pkl           |
+[2020-08-06 11:23:15,242][INFO] |                           db_load = None                              |
+[2020-08-06 11:23:15,242][INFO] |                   pose_estimation = False                             |
+[2020-08-06 11:23:15,243][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 11:23:15,243][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 11:23:15,243][INFO] |                      pose_noniter = False                             |
+[2020-08-06 11:23:15,243][INFO] |                         pose_cupy = False                             |
+[2020-08-06 11:23:15,243][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 11:23:15,243][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 11:23:15,243][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 11:23:15,243][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 11:23:15,243][INFO] |                         topk_load = None                              |
+[2020-08-06 11:23:15,243][INFO] |                         topk_save = ablation-APGeM_LM18.npy           |
+[2020-08-06 11:23:15,243][INFO] |                                qe = None                              |
+[2020-08-06 11:23:15,243][INFO] |                            rerank = None                              |
+[2020-08-06 11:23:15,243][INFO] |                           pose_ld = None                              |
+[2020-08-06 11:23:15,243][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 11:23:15,243][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 11:23:15,243][INFO] |                         optimizer = Adam                              |
+[2020-08-06 11:23:15,243][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 11:23:15,244][INFO] |                         extractor = APGeM_LM18                        |
+[2020-08-06 11:23:15,244][INFO] |                         handcraft = None                              |
+[2020-08-06 11:23:15,244][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 11:23:15,244][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 11:23:15,244][INFO] -------------------------------------------------------------------------
+[2020-08-06 11:23:15,404][INFO] Running time [ params_show ]: 0.164 sec
+[2020-08-06 11:23:15,405][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 11:23:15,448][INFO] Running time [ run_tensorboard ]: 0.043 sec
+[2020-08-06 11:23:16,510][INFO] Running time [ load_data ]: 1.061 sec
+[2020-08-06 11:23:23,448][INFO] Running time [ extractor ]: 6.726 sec
+[2020-08-06 11:23:23,449][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 11:23:23,451][INFO] Running time [ get_optimizer ]: 0.002 sec
+[2020-08-06 11:23:23,451][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 13:50:06,410][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 13:50:06,411][INFO] |                              time = 20200806-225006                   |
+[2020-08-06 13:50:06,411][INFO] |                              seed = 42                                |
+[2020-08-06 13:50:06,411][INFO] |                              port = 8823                              |
+[2020-08-06 13:50:06,411][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 13:50:06,411][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 13:50:06,411][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 13:50:06,411][INFO] |                             batch = 1                                 |
+[2020-08-06 13:50:06,411][INFO] |                           shuffle = False                             |
+[2020-08-06 13:50:06,411][INFO] |                           workers = 4                                 |
+[2020-08-06 13:50:06,411][INFO] |                            epochs = 1000                              |
+[2020-08-06 13:50:06,411][INFO] |                                lr = 0.0001                            |
+[2020-08-06 13:50:06,411][INFO] |                     save_interval = 1                                 |
+[2020-08-06 13:50:06,411][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 13:50:06,412][INFO] |                         ckpt_path = None                              |
+[2020-08-06 13:50:06,412][INFO] |                       save_folder = ablation-APGeM_LM18               |
+[2020-08-06 13:50:06,412][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 13:50:06,412][INFO] |                             train = False                             |
+[2020-08-06 13:50:06,412][INFO] |                              test = False                             |
+[2020-08-06 13:50:06,412][INFO] |                             valid = False                             |
+[2020-08-06 13:50:06,412][INFO] |                      valid_sample = True                              |
+[2020-08-06 13:50:06,412][INFO] |                       qualitative = False                             |
+[2020-08-06 13:50:06,412][INFO] |                           cluster = 64                                |
+[2020-08-06 13:50:06,412][INFO] |                               pca = False                             |
+[2020-08-06 13:50:06,412][INFO] |                           pca_dim = None                              |
+[2020-08-06 13:50:06,412][INFO] |                             tuple = False                             |
+[2020-08-06 13:50:06,412][INFO] |                           neg_num = 1                                 |
+[2020-08-06 13:50:06,412][INFO] |                          cen_crop = False                             |
+[2020-08-06 13:50:06,412][INFO] |                              topk = 100                               |
+[2020-08-06 13:50:06,412][INFO] |                           db_save = ./arxiv/feats/ablation-APGeM_LM18.pkl |
+[2020-08-06 13:50:06,412][INFO] |                           db_load = None                              |
+[2020-08-06 13:50:06,413][INFO] |                   pose_estimation = False                             |
+[2020-08-06 13:50:06,413][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 13:50:06,413][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 13:50:06,413][INFO] |                      pose_noniter = False                             |
+[2020-08-06 13:50:06,413][INFO] |                         pose_cupy = False                             |
+[2020-08-06 13:50:06,413][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 13:50:06,413][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 13:50:06,413][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 13:50:06,413][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 13:50:06,413][INFO] |                         topk_load = None                              |
+[2020-08-06 13:50:06,413][INFO] |                         topk_save = ./arxiv/top100/ablation-APGeM_LM18.npy |
+[2020-08-06 13:50:06,413][INFO] |                                qe = None                              |
+[2020-08-06 13:50:06,413][INFO] |                            rerank = None                              |
+[2020-08-06 13:50:06,413][INFO] |                           pose_ld = None                              |
+[2020-08-06 13:50:06,413][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 13:50:06,413][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 13:50:06,413][INFO] |                         optimizer = Adam                              |
+[2020-08-06 13:50:06,413][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 13:50:06,414][INFO] |                         extractor = APGeM_LM18                        |
+[2020-08-06 13:50:06,414][INFO] |                         handcraft = None                              |
+[2020-08-06 13:50:06,414][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 13:50:06,414][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 13:50:06,414][INFO] -------------------------------------------------------------------------
+[2020-08-06 13:50:06,575][INFO] Running time [ params_show ]: 0.165 sec
+[2020-08-06 13:50:06,575][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 13:50:06,617][INFO] Running time [ run_tensorboard ]: 0.042 sec
+[2020-08-06 13:50:06,801][INFO] Running time [ load_data ]: 0.183 sec
+[2020-08-06 13:50:14,023][INFO] Running time [ extractor ]: 6.981 sec
+[2020-08-06 13:50:14,024][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 13:50:14,025][INFO] Running time [ get_optimizer ]: 0.001 sec
+[2020-08-06 13:50:14,025][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:03:15,247][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:03:15,247][INFO] |                              time = 20200806-230315                   |
+[2020-08-06 14:03:15,248][INFO] |                              seed = 42                                |
+[2020-08-06 14:03:15,248][INFO] |                              port = 8823                              |
+[2020-08-06 14:03:15,248][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:03:15,248][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:03:15,248][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:03:15,248][INFO] |                             batch = 1                                 |
+[2020-08-06 14:03:15,248][INFO] |                           shuffle = False                             |
+[2020-08-06 14:03:15,248][INFO] |                           workers = 4                                 |
+[2020-08-06 14:03:15,248][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:03:15,248][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:03:15,248][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:03:15,248][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:03:15,248][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:03:15,248][INFO] |                       save_folder = ablation-APGeM_LM18               |
+[2020-08-06 14:03:15,248][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:03:15,248][INFO] |                             train = False                             |
+[2020-08-06 14:03:15,248][INFO] |                              test = False                             |
+[2020-08-06 14:03:15,249][INFO] |                             valid = False                             |
+[2020-08-06 14:03:15,249][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:03:15,249][INFO] |                       qualitative = False                             |
+[2020-08-06 14:03:15,249][INFO] |                           cluster = 64                                |
+[2020-08-06 14:03:15,249][INFO] |                               pca = False                             |
+[2020-08-06 14:03:15,249][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:03:15,249][INFO] |                             tuple = False                             |
+[2020-08-06 14:03:15,249][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:03:15,249][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:03:15,249][INFO] |                              topk = 100                               |
+[2020-08-06 14:03:15,249][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-APGeM_LM18.pkl |
+[2020-08-06 14:03:15,249][INFO] |                           db_load = None                              |
+[2020-08-06 14:03:15,249][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:03:15,249][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:03:15,249][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:03:15,249][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:03:15,249][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:03:15,249][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:03:15,249][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:03:15,250][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:03:15,250][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:03:15,250][INFO] |                         topk_load = None                              |
+[2020-08-06 14:03:15,250][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-APGeM_LM18.npy |
+[2020-08-06 14:03:15,250][INFO] |                                qe = None                              |
+[2020-08-06 14:03:15,250][INFO] |                            rerank = None                              |
+[2020-08-06 14:03:15,250][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:03:15,250][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:03:15,250][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:03:15,250][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:03:15,250][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:03:15,250][INFO] |                         extractor = APGeM_LM18                        |
+[2020-08-06 14:03:15,250][INFO] |                         handcraft = None                              |
+[2020-08-06 14:03:15,250][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:03:15,250][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:03:15,250][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:03:15,404][INFO] Running time [ params_show ]: 0.157 sec
+[2020-08-06 14:03:15,405][INFO] Running time [ save_args ]: 0.001 sec
+[2020-08-06 14:03:15,438][INFO] Running time [ run_tensorboard ]: 0.032 sec
+[2020-08-06 14:03:15,602][INFO] Running time [ load_data ]: 0.164 sec
+[2020-08-06 14:03:21,965][INFO] Running time [ extractor ]: 5.947 sec
+[2020-08-06 14:03:21,965][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:03:21,966][INFO] Running time [ get_optimizer ]: 0.001 sec
+[2020-08-06 14:03:21,966][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:14:55,561][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:14:55,562][INFO] |                              time = 20200806-231455                   |
+[2020-08-06 14:14:55,562][INFO] |                              seed = 42                                |
+[2020-08-06 14:14:55,562][INFO] |                              port = 8823                              |
+[2020-08-06 14:14:55,562][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:14:55,562][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:14:55,562][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:14:55,562][INFO] |                             batch = 1                                 |
+[2020-08-06 14:14:55,562][INFO] |                           shuffle = False                             |
+[2020-08-06 14:14:55,562][INFO] |                           workers = 4                                 |
+[2020-08-06 14:14:55,562][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:14:55,562][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:14:55,562][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:14:55,562][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:14:55,562][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:14:55,562][INFO] |                       save_folder = ablation-APGeM_LM18               |
+[2020-08-06 14:14:55,562][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:14:55,562][INFO] |                             train = False                             |
+[2020-08-06 14:14:55,562][INFO] |                              test = False                             |
+[2020-08-06 14:14:55,562][INFO] |                             valid = False                             |
+[2020-08-06 14:14:55,562][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:14:55,563][INFO] |                       qualitative = False                             |
+[2020-08-06 14:14:55,563][INFO] |                           cluster = 64                                |
+[2020-08-06 14:14:55,563][INFO] |                               pca = False                             |
+[2020-08-06 14:14:55,563][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:14:55,563][INFO] |                             tuple = False                             |
+[2020-08-06 14:14:55,563][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:14:55,563][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:14:55,563][INFO] |                              topk = 100                               |
+[2020-08-06 14:14:55,563][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-APGeM_LM18.pkl |
+[2020-08-06 14:14:55,563][INFO] |                           db_load = None                              |
+[2020-08-06 14:14:55,563][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:14:55,563][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:14:55,563][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:14:55,563][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:14:55,563][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:14:55,563][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:14:55,563][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:14:55,563][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:14:55,563][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:14:55,563][INFO] |                         topk_load = None                              |
+[2020-08-06 14:14:55,564][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-APGeM_LM18.npy |
+[2020-08-06 14:14:55,564][INFO] |                                qe = None                              |
+[2020-08-06 14:14:55,564][INFO] |                            rerank = None                              |
+[2020-08-06 14:14:55,564][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:14:55,564][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:14:55,564][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:14:55,564][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:14:55,564][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:14:55,564][INFO] |                         extractor = APGeM_LM18                        |
+[2020-08-06 14:14:55,564][INFO] |                         handcraft = None                              |
+[2020-08-06 14:14:55,564][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:14:55,564][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:14:55,564][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:14:55,702][INFO] Running time [ params_show ]: 0.141 sec
+[2020-08-06 14:14:55,702][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:14:55,732][INFO] Running time [ run_tensorboard ]: 0.030 sec
+[2020-08-06 14:14:55,886][INFO] Running time [ load_data ]: 0.154 sec
+[2020-08-06 14:15:02,167][INFO] Running time [ extractor ]: 6.089 sec
+[2020-08-06 14:15:02,167][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:15:02,169][INFO] Running time [ get_optimizer ]: 0.001 sec
+[2020-08-06 14:15:02,169][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:15:34,874][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:15:34,874][INFO] |                              time = 20200806-231534                   |
+[2020-08-06 14:15:34,874][INFO] |                              seed = 42                                |
+[2020-08-06 14:15:34,874][INFO] |                              port = 8823                              |
+[2020-08-06 14:15:34,874][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:15:34,874][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:15:34,874][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:15:34,874][INFO] |                             batch = 1                                 |
+[2020-08-06 14:15:34,874][INFO] |                           shuffle = False                             |
+[2020-08-06 14:15:34,874][INFO] |                           workers = 4                                 |
+[2020-08-06 14:15:34,874][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:15:34,874][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:15:34,875][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:15:34,875][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:15:34,875][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:15:34,875][INFO] |                       save_folder = ablation-D2_NetVLAD-trainX-pca4096 |
+[2020-08-06 14:15:34,875][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:15:34,875][INFO] |                             train = False                             |
+[2020-08-06 14:15:34,875][INFO] |                              test = False                             |
+[2020-08-06 14:15:34,875][INFO] |                             valid = False                             |
+[2020-08-06 14:15:34,875][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:15:34,875][INFO] |                       qualitative = False                             |
+[2020-08-06 14:15:34,875][INFO] |                           cluster = 64                                |
+[2020-08-06 14:15:34,875][INFO] |                               pca = True                              |
+[2020-08-06 14:15:34,875][INFO] |                           pca_dim = 4096                              |
+[2020-08-06 14:15:34,875][INFO] |                             tuple = False                             |
+[2020-08-06 14:15:34,875][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:15:34,875][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:15:34,875][INFO] |                              topk = 100                               |
+[2020-08-06 14:15:34,875][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-D2_NetVLAD-trainX-pca4096.pkl |
+[2020-08-06 14:15:34,876][INFO] |                           db_load = None                              |
+[2020-08-06 14:15:34,876][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:15:34,876][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:15:34,876][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:15:34,876][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:15:34,876][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:15:34,876][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:15:34,876][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:15:34,876][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:15:34,876][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:15:34,876][INFO] |                         topk_load = None                              |
+[2020-08-06 14:15:34,876][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-D2_NetVLAD-trainX-pca4096.npy |
+[2020-08-06 14:15:34,876][INFO] |                                qe = None                              |
+[2020-08-06 14:15:34,876][INFO] |                            rerank = None                              |
+[2020-08-06 14:15:34,876][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:15:34,876][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:15:34,876][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:15:34,876][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:15:34,876][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:15:34,877][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 14:15:34,877][INFO] |                         handcraft = None                              |
+[2020-08-06 14:15:34,877][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:15:34,877][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:15:34,877][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:15:35,019][INFO] Running time [ params_show ]: 0.145 sec
+[2020-08-06 14:15:35,019][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:15:35,051][INFO] Running time [ run_tensorboard ]: 0.031 sec
+[2020-08-06 14:15:35,210][INFO] Running time [ load_data ]: 0.160 sec
+[2020-08-06 14:15:42,181][INFO] Running time [ extractor ]: 6.614 sec
+[2020-08-06 14:15:42,182][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:15:42,182][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:15:42,182][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:15:52,811][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:15:52,811][INFO] |                              time = 20200806-231552                   |
+[2020-08-06 14:15:52,811][INFO] |                              seed = 42                                |
+[2020-08-06 14:15:52,811][INFO] |                              port = 8823                              |
+[2020-08-06 14:15:52,811][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:15:52,811][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:15:52,811][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:15:52,811][INFO] |                             batch = 1                                 |
+[2020-08-06 14:15:52,811][INFO] |                           shuffle = False                             |
+[2020-08-06 14:15:52,811][INFO] |                           workers = 4                                 |
+[2020-08-06 14:15:52,812][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:15:52,812][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:15:52,812][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:15:52,812][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:15:52,812][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:15:52,812][INFO] |                       save_folder = ablation-Pitts_NetVLAD-trainX-pca4096 |
+[2020-08-06 14:15:52,812][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:15:52,812][INFO] |                             train = False                             |
+[2020-08-06 14:15:52,812][INFO] |                              test = False                             |
+[2020-08-06 14:15:52,812][INFO] |                             valid = False                             |
+[2020-08-06 14:15:52,812][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:15:52,812][INFO] |                       qualitative = False                             |
+[2020-08-06 14:15:52,812][INFO] |                           cluster = 64                                |
+[2020-08-06 14:15:52,812][INFO] |                               pca = True                              |
+[2020-08-06 14:15:52,812][INFO] |                           pca_dim = 4096                              |
+[2020-08-06 14:15:52,812][INFO] |                             tuple = False                             |
+[2020-08-06 14:15:52,812][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:15:52,812][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:15:52,812][INFO] |                              topk = 100                               |
+[2020-08-06 14:15:52,812][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-Pitts_NetVLAD-trainX-pca4096.pkl |
+[2020-08-06 14:15:52,813][INFO] |                           db_load = None                              |
+[2020-08-06 14:15:52,813][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:15:52,813][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:15:52,813][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:15:52,813][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:15:52,813][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:15:52,813][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:15:52,813][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:15:52,813][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:15:52,813][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:15:52,813][INFO] |                         topk_load = None                              |
+[2020-08-06 14:15:52,813][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-Pitts_NetVLAD-trainX-pca4096.npy |
+[2020-08-06 14:15:52,813][INFO] |                                qe = None                              |
+[2020-08-06 14:15:52,813][INFO] |                            rerank = None                              |
+[2020-08-06 14:15:52,813][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:15:52,813][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:15:52,813][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:15:52,813][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:15:52,813][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:15:52,814][INFO] |                         extractor = Pitts_NetVLAD                     |
+[2020-08-06 14:15:52,814][INFO] |                         handcraft = None                              |
+[2020-08-06 14:15:52,814][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:15:52,814][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:15:52,814][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:15:52,947][INFO] Running time [ params_show ]: 0.137 sec
+[2020-08-06 14:15:52,948][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:15:52,977][INFO] Running time [ run_tensorboard ]: 0.029 sec
+[2020-08-06 14:15:53,126][INFO] Running time [ load_data ]: 0.149 sec
+[2020-08-06 14:16:02,305][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:16:02,306][INFO] |                              time = 20200806-231602                   |
+[2020-08-06 14:16:02,306][INFO] |                              seed = 42                                |
+[2020-08-06 14:16:02,306][INFO] |                              port = 8823                              |
+[2020-08-06 14:16:02,306][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:16:02,306][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:16:02,307][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:16:02,307][INFO] |                             batch = 1                                 |
+[2020-08-06 14:16:02,307][INFO] |                           shuffle = False                             |
+[2020-08-06 14:16:02,307][INFO] |                           workers = 4                                 |
+[2020-08-06 14:16:02,307][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:16:02,307][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:16:02,307][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:16:02,307][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:16:02,307][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:16:02,307][INFO] |                       save_folder = ablation-APGeM_LM18               |
+[2020-08-06 14:16:02,307][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:16:02,307][INFO] |                             train = False                             |
+[2020-08-06 14:16:02,307][INFO] |                              test = False                             |
+[2020-08-06 14:16:02,307][INFO] |                             valid = False                             |
+[2020-08-06 14:16:02,307][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:16:02,307][INFO] |                       qualitative = False                             |
+[2020-08-06 14:16:02,308][INFO] |                           cluster = 64                                |
+[2020-08-06 14:16:02,308][INFO] |                               pca = False                             |
+[2020-08-06 14:16:02,308][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:16:02,308][INFO] |                             tuple = False                             |
+[2020-08-06 14:16:02,308][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:16:02,308][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:16:02,308][INFO] |                              topk = 100                               |
+[2020-08-06 14:16:02,308][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-APGeM_LM18.pkl |
+[2020-08-06 14:16:02,308][INFO] |                           db_load = None                              |
+[2020-08-06 14:16:02,308][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:16:02,308][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:16:02,308][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:16:02,308][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:16:02,308][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:16:02,309][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:16:02,309][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:16:02,309][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:16:02,309][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:16:02,309][INFO] |                         topk_load = None                              |
+[2020-08-06 14:16:02,309][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-APGeM_LM18.npy |
+[2020-08-06 14:16:02,309][INFO] |                                qe = None                              |
+[2020-08-06 14:16:02,309][INFO] |                            rerank = None                              |
+[2020-08-06 14:16:02,309][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:16:02,309][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:16:02,309][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:16:02,309][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:16:02,309][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:16:02,309][INFO] |                         extractor = APGeM_LM18                        |
+[2020-08-06 14:16:02,309][INFO] |                         handcraft = None                              |
+[2020-08-06 14:16:02,309][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:16:02,310][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:16:02,310][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:16:02,478][INFO] Running time [ params_show ]: 0.172 sec
+[2020-08-06 14:16:02,478][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:16:02,528][INFO] Running time [ run_tensorboard ]: 0.049 sec
+[2020-08-06 14:16:02,715][INFO] Running time [ load_data ]: 0.187 sec
+[2020-08-06 14:16:08,933][INFO] Running time [ extractor ]: 6.007 sec
+[2020-08-06 14:16:08,933][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:16:08,934][INFO] Running time [ get_optimizer ]: 0.001 sec
+[2020-08-06 14:16:08,934][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:26:47,325][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:26:47,325][INFO] |                              time = 20200806-232647                   |
+[2020-08-06 14:26:47,325][INFO] |                              seed = 42                                |
+[2020-08-06 14:26:47,325][INFO] |                              port = 8823                              |
+[2020-08-06 14:26:47,325][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:26:47,325][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:47,325][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:47,326][INFO] |                             batch = 1                                 |
+[2020-08-06 14:26:47,326][INFO] |                           shuffle = False                             |
+[2020-08-06 14:26:47,326][INFO] |                           workers = 4                                 |
+[2020-08-06 14:26:47,326][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:26:47,326][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:26:47,326][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:26:47,326][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:26:47,326][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:26:47,326][INFO] |                       save_folder = ablation-D2_NetVLAD-trainX        |
+[2020-08-06 14:26:47,326][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:26:47,326][INFO] |                             train = False                             |
+[2020-08-06 14:26:47,326][INFO] |                              test = False                             |
+[2020-08-06 14:26:47,326][INFO] |                             valid = False                             |
+[2020-08-06 14:26:47,326][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:26:47,326][INFO] |                       qualitative = False                             |
+[2020-08-06 14:26:47,326][INFO] |                           cluster = 64                                |
+[2020-08-06 14:26:47,326][INFO] |                               pca = False                             |
+[2020-08-06 14:26:47,326][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:26:47,326][INFO] |                             tuple = False                             |
+[2020-08-06 14:26:47,327][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:26:47,327][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:26:47,327][INFO] |                              topk = 100                               |
+[2020-08-06 14:26:47,327][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-D2_NetVLAD-trainX.pkl |
+[2020-08-06 14:26:47,327][INFO] |                           db_load = None                              |
+[2020-08-06 14:26:47,327][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:26:47,327][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:26:47,327][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:26:47,327][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:26:47,327][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:26:47,327][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:26:47,327][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:26:47,327][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:26:47,327][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:26:47,327][INFO] |                         topk_load = None                              |
+[2020-08-06 14:26:47,327][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-D2_NetVLAD-trainX.npy |
+[2020-08-06 14:26:47,327][INFO] |                                qe = None                              |
+[2020-08-06 14:26:47,327][INFO] |                            rerank = None                              |
+[2020-08-06 14:26:47,328][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:26:47,328][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:26:47,328][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:26:47,328][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:26:47,328][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:26:47,328][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 14:26:47,328][INFO] |                         handcraft = None                              |
+[2020-08-06 14:26:47,328][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:26:47,328][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:26:47,328][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:26:47,490][INFO] Running time [ params_show ]: 0.165 sec
+[2020-08-06 14:26:47,491][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:26:47,532][INFO] Running time [ run_tensorboard ]: 0.042 sec
+[2020-08-06 14:26:47,726][INFO] Running time [ load_data ]: 0.193 sec
+[2020-08-06 14:26:49,823][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:26:49,824][INFO] |                              time = 20200806-232649                   |
+[2020-08-06 14:26:49,824][INFO] |                              seed = 42                                |
+[2020-08-06 14:26:49,824][INFO] |                              port = 8823                              |
+[2020-08-06 14:26:49,824][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:26:49,824][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:49,824][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:49,824][INFO] |                             batch = 1                                 |
+[2020-08-06 14:26:49,824][INFO] |                           shuffle = False                             |
+[2020-08-06 14:26:49,824][INFO] |                           workers = 4                                 |
+[2020-08-06 14:26:49,824][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:26:49,824][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:26:49,824][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:26:49,824][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:26:49,824][INFO] |                         ckpt_path = ./jobs/capstone2020/20200527-015656_D2+NetVLAD_top10/ckpt/checkpoint_subset000_epoch024.pth.tar |
+[2020-08-06 14:26:49,824][INFO] |                       save_folder = ablation-D2_NetVLAD-trainO        |
+[2020-08-06 14:26:49,824][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:26:49,824][INFO] |                             train = False                             |
+[2020-08-06 14:26:49,824][INFO] |                              test = False                             |
+[2020-08-06 14:26:49,825][INFO] |                             valid = False                             |
+[2020-08-06 14:26:49,825][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:26:49,825][INFO] |                       qualitative = False                             |
+[2020-08-06 14:26:49,825][INFO] |                           cluster = 64                                |
+[2020-08-06 14:26:49,825][INFO] |                               pca = False                             |
+[2020-08-06 14:26:49,825][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:26:49,825][INFO] |                             tuple = False                             |
+[2020-08-06 14:26:49,825][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:26:49,825][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:26:49,825][INFO] |                              topk = 100                               |
+[2020-08-06 14:26:49,825][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-D2_NetVLAD-trainO.pkl |
+[2020-08-06 14:26:49,825][INFO] |                           db_load = None                              |
+[2020-08-06 14:26:49,825][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:26:49,825][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:26:49,825][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:26:49,825][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:26:49,825][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:26:49,825][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:26:49,826][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:26:49,826][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:26:49,826][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:26:49,826][INFO] |                         topk_load = None                              |
+[2020-08-06 14:26:49,826][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-D2_NetVLAD-trainO.npy |
+[2020-08-06 14:26:49,826][INFO] |                                qe = None                              |
+[2020-08-06 14:26:49,826][INFO] |                            rerank = None                              |
+[2020-08-06 14:26:49,826][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:26:49,826][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:26:49,826][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:26:49,826][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:26:49,826][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:26:49,826][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 14:26:49,826][INFO] |                         handcraft = None                              |
+[2020-08-06 14:26:49,826][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:26:49,826][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:26:49,826][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:26:49,987][INFO] Running time [ params_show ]: 0.164 sec
+[2020-08-06 14:26:49,988][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:26:50,031][INFO] Running time [ run_tensorboard ]: 0.043 sec
+[2020-08-06 14:26:50,214][INFO] Running time [ load_data ]: 0.183 sec
+[2020-08-06 14:26:53,027][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:26:53,027][INFO] |                              time = 20200806-232653                   |
+[2020-08-06 14:26:53,028][INFO] |                              seed = 42                                |
+[2020-08-06 14:26:53,028][INFO] |                              port = 8823                              |
+[2020-08-06 14:26:53,028][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:26:53,028][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:53,028][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:53,028][INFO] |                             batch = 1                                 |
+[2020-08-06 14:26:53,028][INFO] |                           shuffle = False                             |
+[2020-08-06 14:26:53,028][INFO] |                           workers = 4                                 |
+[2020-08-06 14:26:53,028][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:26:53,028][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:26:53,028][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:26:53,028][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:26:53,028][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:26:53,028][INFO] |                       save_folder = ablation-D2_NetVLAD-trainX-pca4096 |
+[2020-08-06 14:26:53,028][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:26:53,028][INFO] |                             train = False                             |
+[2020-08-06 14:26:53,028][INFO] |                              test = False                             |
+[2020-08-06 14:26:53,028][INFO] |                             valid = False                             |
+[2020-08-06 14:26:53,029][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:26:53,029][INFO] |                       qualitative = False                             |
+[2020-08-06 14:26:53,029][INFO] |                           cluster = 64                                |
+[2020-08-06 14:26:53,029][INFO] |                               pca = True                              |
+[2020-08-06 14:26:53,029][INFO] |                           pca_dim = 4096                              |
+[2020-08-06 14:26:53,029][INFO] |                             tuple = False                             |
+[2020-08-06 14:26:53,029][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:26:53,029][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:26:53,029][INFO] |                              topk = 100                               |
+[2020-08-06 14:26:53,029][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-D2_NetVLAD-trainX-pca4096.pkl |
+[2020-08-06 14:26:53,029][INFO] |                           db_load = None                              |
+[2020-08-06 14:26:53,029][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:26:53,029][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:26:53,029][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:26:53,029][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:26:53,029][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:26:53,029][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:26:53,029][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:26:53,030][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:26:53,030][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:26:53,030][INFO] |                         topk_load = None                              |
+[2020-08-06 14:26:53,030][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-D2_NetVLAD-trainX-pca4096.npy |
+[2020-08-06 14:26:53,030][INFO] |                                qe = None                              |
+[2020-08-06 14:26:53,030][INFO] |                            rerank = None                              |
+[2020-08-06 14:26:53,030][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:26:53,030][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:26:53,030][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:26:53,030][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:26:53,030][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:26:53,030][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 14:26:53,030][INFO] |                         handcraft = None                              |
+[2020-08-06 14:26:53,030][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:26:53,030][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:26:53,030][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:26:53,181][INFO] Running time [ params_show ]: 0.154 sec
+[2020-08-06 14:26:53,182][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:26:53,224][INFO] Running time [ run_tensorboard ]: 0.042 sec
+[2020-08-06 14:26:53,422][INFO] Running time [ load_data ]: 0.198 sec
+[2020-08-06 14:26:55,761][INFO] Running time [ extractor ]: 7.665 sec
+[2020-08-06 14:26:55,762][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:26:55,762][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:26:55,762][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:26:57,254][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:26:57,255][INFO] |                              time = 20200806-232657                   |
+[2020-08-06 14:26:57,255][INFO] |                              seed = 42                                |
+[2020-08-06 14:26:57,255][INFO] |                              port = 8823                              |
+[2020-08-06 14:26:57,255][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:26:57,255][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:57,255][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:26:57,255][INFO] |                             batch = 1                                 |
+[2020-08-06 14:26:57,255][INFO] |                           shuffle = False                             |
+[2020-08-06 14:26:57,255][INFO] |                           workers = 4                                 |
+[2020-08-06 14:26:57,255][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:26:57,256][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:26:57,256][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:26:57,256][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:26:57,256][INFO] |                         ckpt_path = ./jobs/capstone2020/20200527-015656_D2+NetVLAD_top10/ckpt/checkpoint_subset000_epoch024.pth.tar |
+[2020-08-06 14:26:57,256][INFO] |                       save_folder = ablation-D2_NetVLAD-trainO-pca4096 |
+[2020-08-06 14:26:57,256][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:26:57,256][INFO] |                             train = False                             |
+[2020-08-06 14:26:57,256][INFO] |                              test = False                             |
+[2020-08-06 14:26:57,256][INFO] |                             valid = False                             |
+[2020-08-06 14:26:57,256][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:26:57,256][INFO] |                       qualitative = False                             |
+[2020-08-06 14:26:57,256][INFO] |                           cluster = 64                                |
+[2020-08-06 14:26:57,256][INFO] |                               pca = True                              |
+[2020-08-06 14:26:57,256][INFO] |                           pca_dim = 4096                              |
+[2020-08-06 14:26:57,256][INFO] |                             tuple = False                             |
+[2020-08-06 14:26:57,256][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:26:57,256][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:26:57,256][INFO] |                              topk = 100                               |
+[2020-08-06 14:26:57,256][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-D2_NetVLAD-trainO-pca4096.pkl |
+[2020-08-06 14:26:57,257][INFO] |                           db_load = None                              |
+[2020-08-06 14:26:57,257][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:26:57,257][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:26:57,257][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:26:57,257][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:26:57,257][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:26:57,257][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:26:57,257][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:26:57,257][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:26:57,257][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:26:57,257][INFO] |                         topk_load = None                              |
+[2020-08-06 14:26:57,257][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-D2_NetVLAD-trainO-pca4096.npy |
+[2020-08-06 14:26:57,257][INFO] |                                qe = None                              |
+[2020-08-06 14:26:57,258][INFO] |                            rerank = None                              |
+[2020-08-06 14:26:57,258][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:26:57,258][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:26:57,258][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:26:57,258][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:26:57,258][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:26:57,258][INFO] |                         extractor = D2_NetVLAD                        |
+[2020-08-06 14:26:57,258][INFO] |                         handcraft = None                              |
+[2020-08-06 14:26:57,258][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:26:57,258][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:26:57,258][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:26:57,485][INFO] Running time [ params_show ]: 0.230 sec
+[2020-08-06 14:26:57,485][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:26:57,532][INFO] Running time [ run_tensorboard ]: 0.046 sec
+[2020-08-06 14:26:57,773][INFO] Running time [ load_data ]: 0.241 sec
+[2020-08-06 14:26:58,205][INFO] Running time [ extractor ]: 7.761 sec
+[2020-08-06 14:26:58,205][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:26:58,205][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:26:58,205][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:27:02,041][INFO] Running time [ extractor ]: 7.869 sec
+[2020-08-06 14:27:02,042][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:27:02,042][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:27:02,042][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:27:05,878][INFO] Running time [ extractor ]: 7.699 sec
+[2020-08-06 14:27:05,878][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:27:05,879][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:27:05,879][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:38:20,214][INFO] Running time [ train ]: 692.117 sec
+[2020-08-06 14:38:21,054][INFO] Running time [ train ]: 690.610 sec
+[2020-08-06 14:38:25,959][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:38:25,960][INFO] |                              time = 20200806-233825                   |
+[2020-08-06 14:38:25,960][INFO] |                              seed = 42                                |
+[2020-08-06 14:38:25,960][INFO] |                              port = 8823                              |
+[2020-08-06 14:38:25,960][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:38:25,960][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:38:25,960][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:38:25,960][INFO] |                             batch = 1                                 |
+[2020-08-06 14:38:25,960][INFO] |                           shuffle = False                             |
+[2020-08-06 14:38:25,960][INFO] |                           workers = 4                                 |
+[2020-08-06 14:38:25,960][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:38:25,960][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:38:25,960][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:38:25,960][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:38:25,961][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:38:25,961][INFO] |                       save_folder = ablation-Pitts_NetVLAD-trainX     |
+[2020-08-06 14:38:25,961][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:38:25,961][INFO] |                             train = False                             |
+[2020-08-06 14:38:25,961][INFO] |                              test = False                             |
+[2020-08-06 14:38:25,961][INFO] |                             valid = False                             |
+[2020-08-06 14:38:25,961][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:38:25,961][INFO] |                       qualitative = False                             |
+[2020-08-06 14:38:25,961][INFO] |                           cluster = 64                                |
+[2020-08-06 14:38:25,961][INFO] |                               pca = False                             |
+[2020-08-06 14:38:25,961][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:38:25,961][INFO] |                             tuple = False                             |
+[2020-08-06 14:38:25,961][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:38:25,961][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:38:25,961][INFO] |                              topk = 100                               |
+[2020-08-06 14:38:25,961][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-Pitts_NetVLAD-trainX.pkl |
+[2020-08-06 14:38:25,961][INFO] |                           db_load = None                              |
+[2020-08-06 14:38:25,961][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:38:25,961][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:38:25,962][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:38:25,962][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:38:25,962][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:38:25,962][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:38:25,962][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:38:25,962][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:38:25,962][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:38:25,962][INFO] |                         topk_load = None                              |
+[2020-08-06 14:38:25,962][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-Pittss_NetVLAD-trainX.npy |
+[2020-08-06 14:38:25,962][INFO] |                                qe = None                              |
+[2020-08-06 14:38:25,962][INFO] |                            rerank = None                              |
+[2020-08-06 14:38:25,962][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:38:25,962][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:38:25,962][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:38:25,962][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:38:25,962][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:38:25,962][INFO] |                         extractor = Pitts_NetVLAD                     |
+[2020-08-06 14:38:25,962][INFO] |                         handcraft = None                              |
+[2020-08-06 14:38:25,962][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:38:25,962][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:38:25,963][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:38:26,116][INFO] Running time [ params_show ]: 0.157 sec
+[2020-08-06 14:38:26,117][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:38:26,160][INFO] Running time [ run_tensorboard ]: 0.043 sec
+[2020-08-06 14:38:26,356][INFO] Running time [ load_data ]: 0.195 sec
+[2020-08-06 14:38:26,460][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:38:26,460][INFO] |                              time = 20200806-233826                   |
+[2020-08-06 14:38:26,460][INFO] |                              seed = 42                                |
+[2020-08-06 14:38:26,460][INFO] |                              port = 8823                              |
+[2020-08-06 14:38:26,460][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:38:26,461][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:38:26,461][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:38:26,461][INFO] |                             batch = 1                                 |
+[2020-08-06 14:38:26,461][INFO] |                           shuffle = False                             |
+[2020-08-06 14:38:26,461][INFO] |                           workers = 4                                 |
+[2020-08-06 14:38:26,461][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:38:26,461][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:38:26,461][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:38:26,461][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:38:26,461][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:38:26,461][INFO] |                       save_folder = ablation-APGeM                    |
+[2020-08-06 14:38:26,461][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:38:26,461][INFO] |                             train = False                             |
+[2020-08-06 14:38:26,461][INFO] |                              test = False                             |
+[2020-08-06 14:38:26,461][INFO] |                             valid = False                             |
+[2020-08-06 14:38:26,461][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:38:26,461][INFO] |                       qualitative = False                             |
+[2020-08-06 14:38:26,462][INFO] |                           cluster = 64                                |
+[2020-08-06 14:38:26,462][INFO] |                               pca = False                             |
+[2020-08-06 14:38:26,462][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:38:26,462][INFO] |                             tuple = False                             |
+[2020-08-06 14:38:26,462][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:38:26,462][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:38:26,462][INFO] |                              topk = 100                               |
+[2020-08-06 14:38:26,462][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-APGeM.pkl |
+[2020-08-06 14:38:26,462][INFO] |                           db_load = None                              |
+[2020-08-06 14:38:26,462][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:38:26,462][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:38:26,462][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:38:26,462][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:38:26,462][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:38:26,462][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:38:26,462][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:38:26,463][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:38:26,463][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:38:26,463][INFO] |                         topk_load = None                              |
+[2020-08-06 14:38:26,463][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-APGeM.npy |
+[2020-08-06 14:38:26,463][INFO] |                                qe = None                              |
+[2020-08-06 14:38:26,463][INFO] |                            rerank = None                              |
+[2020-08-06 14:38:26,463][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:38:26,463][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:38:26,463][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:38:26,463][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:38:26,463][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:38:26,463][INFO] |                         extractor = APGeM                             |
+[2020-08-06 14:38:26,463][INFO] |                         handcraft = None                              |
+[2020-08-06 14:38:26,463][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:38:26,463][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:38:26,463][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:38:26,623][INFO] Running time [ params_show ]: 0.163 sec
+[2020-08-06 14:38:26,624][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:38:26,667][INFO] Running time [ run_tensorboard ]: 0.043 sec
+[2020-08-06 14:38:26,844][INFO] Running time [ load_data ]: 0.177 sec
+[2020-08-06 14:38:34,429][INFO] Running time [ extractor ]: 7.810 sec
+[2020-08-06 14:38:34,429][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:38:34,429][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:38:34,429][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:38:35,689][INFO] Running time [ extractor ]: 8.617 sec
+[2020-08-06 14:38:35,690][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:38:35,691][INFO] Running time [ get_optimizer ]: 0.001 sec
+[2020-08-06 14:38:35,691][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:48:22,984][INFO] Running time [ train ]: 596.365 sec
+[2020-08-06 14:48:28,815][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:48:28,816][INFO] |                              time = 20200806-234828                   |
+[2020-08-06 14:48:28,816][INFO] |                              seed = 42                                |
+[2020-08-06 14:48:28,816][INFO] |                              port = 8823                              |
+[2020-08-06 14:48:28,816][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:48:28,816][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:48:28,816][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:48:28,816][INFO] |                             batch = 1                                 |
+[2020-08-06 14:48:28,816][INFO] |                           shuffle = False                             |
+[2020-08-06 14:48:28,816][INFO] |                           workers = 4                                 |
+[2020-08-06 14:48:28,816][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:48:28,816][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:48:28,816][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:48:28,817][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:48:28,817][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:48:28,817][INFO] |                       save_folder = ablation-Ensemble-APGeM+APGeM_LM18+D2_NetVLAD |
+[2020-08-06 14:48:28,817][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:48:28,817][INFO] |                             train = False                             |
+[2020-08-06 14:48:28,817][INFO] |                              test = False                             |
+[2020-08-06 14:48:28,817][INFO] |                             valid = False                             |
+[2020-08-06 14:48:28,817][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:48:28,817][INFO] |                       qualitative = False                             |
+[2020-08-06 14:48:28,817][INFO] |                           cluster = 64                                |
+[2020-08-06 14:48:28,817][INFO] |                               pca = False                             |
+[2020-08-06 14:48:28,817][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:48:28,817][INFO] |                             tuple = False                             |
+[2020-08-06 14:48:28,817][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:48:28,817][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:48:28,817][INFO] |                              topk = 100                               |
+[2020-08-06 14:48:28,817][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-Ensemble-APGeM+APGeM_LM18+D2_NetVLAD.pkl |
+[2020-08-06 14:48:28,818][INFO] |                           db_load = None                              |
+[2020-08-06 14:48:28,818][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:48:28,818][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:48:28,818][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:48:28,818][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:48:28,818][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:48:28,818][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:48:28,818][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:48:28,818][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:48:28,818][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:48:28,818][INFO] |                         topk_load = None                              |
+[2020-08-06 14:48:28,818][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-Ensemble-APGeM+APGeM_LM18+D2_NetVLAD.npy |
+[2020-08-06 14:48:28,818][INFO] |                                qe = None                              |
+[2020-08-06 14:48:28,818][INFO] |                            rerank = None                              |
+[2020-08-06 14:48:28,818][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:48:28,818][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:48:28,818][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:48:28,818][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:48:28,819][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:48:28,819][INFO] |                         extractor = Ensemble(APGeM + APGeM_LM18 + D2_NetVLAD) |
+[2020-08-06 14:48:28,819][INFO] |                         handcraft = None                              |
+[2020-08-06 14:48:28,819][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:48:28,819][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:48:28,819][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:48:28,984][INFO] Running time [ params_show ]: 0.168 sec
+[2020-08-06 14:48:28,985][INFO] Running time [ save_args ]: 0.001 sec
+[2020-08-06 14:48:29,031][INFO] Running time [ run_tensorboard ]: 0.046 sec
+[2020-08-06 14:48:29,222][INFO] Running time [ load_data ]: 0.191 sec
+[2020-08-06 14:48:47,041][INFO] Running time [ extractor ]: 16.070 sec
+[2020-08-06 14:48:47,042][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:48:47,044][INFO] Running time [ get_optimizer ]: 0.002 sec
+[2020-08-06 14:48:47,044][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:49:30,383][INFO] Running time [ train ]: 663.311 sec
+[2020-08-06 14:51:54,878][ERROR] Specify --extractor or --handcraft
+
+[2020-08-06 14:52:59,668][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:52:59,668][INFO] |                              time = 20200806-235259                   |
+[2020-08-06 14:52:59,668][INFO] |                              seed = 42                                |
+[2020-08-06 14:52:59,668][INFO] |                              port = 8825                              |
+[2020-08-06 14:52:59,668][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:52:59,668][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:52:59,668][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:52:59,668][INFO] |                             batch = 1                                 |
+[2020-08-06 14:52:59,669][INFO] |                           shuffle = True                              |
+[2020-08-06 14:52:59,669][INFO] |                           workers = 4                                 |
+[2020-08-06 14:52:59,669][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:52:59,669][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:52:59,669][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:52:59,669][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:52:59,669][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:52:59,669][INFO] |                       save_folder = Pitts_NetVLAD_top100              |
+[2020-08-06 14:52:59,669][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:52:59,669][INFO] |                             train = True                              |
+[2020-08-06 14:52:59,669][INFO] |                              test = False                             |
+[2020-08-06 14:52:59,669][INFO] |                             valid = False                             |
+[2020-08-06 14:52:59,669][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:52:59,669][INFO] |                       qualitative = False                             |
+[2020-08-06 14:52:59,669][INFO] |                           cluster = 64                                |
+[2020-08-06 14:52:59,669][INFO] |                               pca = False                             |
+[2020-08-06 14:52:59,669][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:52:59,670][INFO] |                             tuple = True                              |
+[2020-08-06 14:52:59,670][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:52:59,670][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:52:59,670][INFO] |                              topk = 100                               |
+[2020-08-06 14:52:59,670][INFO] |                           db_save = None                              |
+[2020-08-06 14:52:59,670][INFO] |                           db_load = None                              |
+[2020-08-06 14:52:59,670][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:52:59,670][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:52:59,670][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:52:59,670][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:52:59,670][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:52:59,670][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:52:59,670][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:52:59,670][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:52:59,670][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:52:59,670][INFO] |                         topk_load = None                              |
+[2020-08-06 14:52:59,670][INFO] |                         topk_save = None                              |
+[2020-08-06 14:52:59,671][INFO] |                                qe = None                              |
+[2020-08-06 14:52:59,671][INFO] |                            rerank = None                              |
+[2020-08-06 14:52:59,671][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:52:59,671][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:52:59,671][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:52:59,671][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:52:59,671][INFO] |                         scheduler = StepLR                            |
+[2020-08-06 14:52:59,671][INFO] |                         extractor = Pitts_NetVLAD                     |
+[2020-08-06 14:52:59,671][INFO] |                         handcraft = None                              |
+[2020-08-06 14:52:59,671][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:52:59,671][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:52:59,671][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:52:59,834][INFO] Running time [ params_show ]: 0.166 sec
+[2020-08-06 14:52:59,835][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:52:59,878][INFO] Running time [ run_tensorboard ]: 0.043 sec
+[2020-08-06 14:53:00,071][INFO] Running time [ load_data ]: 0.192 sec
+[2020-08-06 14:53:10,767][INFO] Running time [ extractor ]: 10.395 sec
+[2020-08-06 14:53:10,768][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:53:10,768][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:53:10,768][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:57:16,154][INFO] Running time [ train ]: 1817.976 sec
+[2020-08-06 14:57:21,663][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:57:21,664][INFO] |                              time = 20200806-235721                   |
+[2020-08-06 14:57:21,664][INFO] |                              seed = 42                                |
+[2020-08-06 14:57:21,664][INFO] |                              port = 8823                              |
+[2020-08-06 14:57:21,664][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:57:21,664][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:57:21,664][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:57:21,664][INFO] |                             batch = 1                                 |
+[2020-08-06 14:57:21,664][INFO] |                           shuffle = False                             |
+[2020-08-06 14:57:21,664][INFO] |                           workers = 4                                 |
+[2020-08-06 14:57:21,664][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:57:21,664][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:57:21,664][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:57:21,664][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:57:21,664][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:57:21,664][INFO] |                       save_folder = ablation-APGeM_LM18               |
+[2020-08-06 14:57:21,664][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:57:21,665][INFO] |                             train = False                             |
+[2020-08-06 14:57:21,665][INFO] |                              test = False                             |
+[2020-08-06 14:57:21,665][INFO] |                             valid = False                             |
+[2020-08-06 14:57:21,665][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:57:21,665][INFO] |                       qualitative = False                             |
+[2020-08-06 14:57:21,665][INFO] |                           cluster = 64                                |
+[2020-08-06 14:57:21,665][INFO] |                               pca = False                             |
+[2020-08-06 14:57:21,665][INFO] |                           pca_dim = None                              |
+[2020-08-06 14:57:21,665][INFO] |                             tuple = False                             |
+[2020-08-06 14:57:21,665][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:57:21,665][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:57:21,665][INFO] |                              topk = 100                               |
+[2020-08-06 14:57:21,665][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-APGeM_LM18.pkl |
+[2020-08-06 14:57:21,665][INFO] |                           db_load = None                              |
+[2020-08-06 14:57:21,665][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:57:21,665][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:57:21,665][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:57:21,665][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:57:21,666][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:57:21,666][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:57:21,666][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:57:21,666][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:57:21,666][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:57:21,666][INFO] |                         topk_load = None                              |
+[2020-08-06 14:57:21,666][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-APGeM_LM18.npy |
+[2020-08-06 14:57:21,666][INFO] |                                qe = None                              |
+[2020-08-06 14:57:21,666][INFO] |                            rerank = None                              |
+[2020-08-06 14:57:21,666][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:57:21,666][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:57:21,666][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:57:21,666][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:57:21,666][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:57:21,666][INFO] |                         extractor = APGeM_LM18                        |
+[2020-08-06 14:57:21,666][INFO] |                         handcraft = None                              |
+[2020-08-06 14:57:21,666][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:57:21,666][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:57:21,666][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:57:21,820][INFO] Running time [ params_show ]: 0.156 sec
+[2020-08-06 14:57:21,820][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:57:21,862][INFO] Running time [ run_tensorboard ]: 0.042 sec
+[2020-08-06 14:57:22,042][INFO] Running time [ load_data ]: 0.179 sec
+[2020-08-06 14:57:30,961][INFO] Running time [ extractor ]: 7.315 sec
+[2020-08-06 14:57:30,962][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:57:30,964][INFO] Running time [ get_optimizer ]: 0.002 sec
+[2020-08-06 14:57:30,964][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 14:58:21,978][INFO] Running time [ train ]: 1887.806 sec
+[2020-08-06 14:58:27,703][INFO] ------------------------------ Params List ------------------------------
+[2020-08-06 14:58:27,703][INFO] |                              time = 20200806-235827                   |
+[2020-08-06 14:58:27,703][INFO] |                              seed = 42                                |
+[2020-08-06 14:58:27,703][INFO] |                              port = 8823                              |
+[2020-08-06 14:58:27,703][INFO] |                        image_size = [512, 512]                        |
+[2020-08-06 14:58:27,703][INFO] |                    normalize_mean = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:58:27,703][INFO] |                     normalize_std = (0.5, 0.5, 0.5)                   |
+[2020-08-06 14:58:27,703][INFO] |                             batch = 1                                 |
+[2020-08-06 14:58:27,703][INFO] |                           shuffle = False                             |
+[2020-08-06 14:58:27,704][INFO] |                           workers = 4                                 |
+[2020-08-06 14:58:27,704][INFO] |                            epochs = 1000                              |
+[2020-08-06 14:58:27,704][INFO] |                                lr = 0.0001                            |
+[2020-08-06 14:58:27,704][INFO] |                     save_interval = 1                                 |
+[2020-08-06 14:58:27,704][INFO] |                         save_root = ./jobs/capstone2020/              |
+[2020-08-06 14:58:27,704][INFO] |                         ckpt_path = None                              |
+[2020-08-06 14:58:27,704][INFO] |                       save_folder = ablation-Pitts_NetVLAD-trainX-pca4096 |
+[2020-08-06 14:58:27,704][INFO] |                    valid_interval = 1                                 |
+[2020-08-06 14:58:27,704][INFO] |                             train = False                             |
+[2020-08-06 14:58:27,704][INFO] |                              test = False                             |
+[2020-08-06 14:58:27,704][INFO] |                             valid = False                             |
+[2020-08-06 14:58:27,704][INFO] |                      valid_sample = True                              |
+[2020-08-06 14:58:27,704][INFO] |                       qualitative = False                             |
+[2020-08-06 14:58:27,704][INFO] |                           cluster = 64                                |
+[2020-08-06 14:58:27,704][INFO] |                               pca = True                              |
+[2020-08-06 14:58:27,704][INFO] |                           pca_dim = 4096                              |
+[2020-08-06 14:58:27,704][INFO] |                             tuple = False                             |
+[2020-08-06 14:58:27,705][INFO] |                           neg_num = 1                                 |
+[2020-08-06 14:58:27,705][INFO] |                          cen_crop = False                             |
+[2020-08-06 14:58:27,705][INFO] |                              topk = 100                               |
+[2020-08-06 14:58:27,705][INFO] |                           db_save = ./arxiv/ablation/feats/ablation-Pitts_NetVLAD-trainX-pca4096.pkl |
+[2020-08-06 14:58:27,705][INFO] |                           db_load = None                              |
+[2020-08-06 14:58:27,705][INFO] |                   pose_estimation = False                             |
+[2020-08-06 14:58:27,705][INFO] |              pose_pointcloud_load = False                             |
+[2020-08-06 14:58:27,705][INFO] |                 pose_covisibility = 0                                 |
+[2020-08-06 14:58:27,705][INFO] |                      pose_noniter = False                             |
+[2020-08-06 14:58:27,705][INFO] |                         pose_cupy = False                             |
+[2020-08-06 14:58:27,705][INFO] |                  pose_timechecker = False                             |
+[2020-08-06 14:58:27,705][INFO] |                         lmr_score = 0                                 |
+[2020-08-06 14:58:27,705][INFO] |                       qe_stacknum = 0                                 |
+[2020-08-06 14:58:27,705][INFO] |                         qe_filter = 0                                 |
+[2020-08-06 14:58:27,705][INFO] |                         topk_load = None                              |
+[2020-08-06 14:58:27,705][INFO] |                         topk_save = ./arxiv/ablation/top100/ablation-Pitts_NetVLAD-trainX-pca4096.npy |
+[2020-08-06 14:58:27,705][INFO] |                                qe = None                              |
+[2020-08-06 14:58:27,705][INFO] |                            rerank = None                              |
+[2020-08-06 14:58:27,706][INFO] |                           pose_ld = None                              |
+[2020-08-06 14:58:27,706][INFO] |                positive_selection = Thresholding                      |
+[2020-08-06 14:58:27,706][INFO] |                           dataset = NaverML_indoor b1                 |
+[2020-08-06 14:58:27,706][INFO] |                         optimizer = Adam                              |
+[2020-08-06 14:58:27,706][INFO] |                         scheduler = CosineAnnealingLR                 |
+[2020-08-06 14:58:27,706][INFO] |                         extractor = Pitts_NetVLAD                     |
+[2020-08-06 14:58:27,706][INFO] |                         handcraft = None                              |
+[2020-08-06 14:58:27,706][INFO] |                         searching = kNearestNeighbors_GPU             |
+[2020-08-06 14:58:27,706][INFO] |                            metric = LocDegThreshMetric                |
+[2020-08-06 14:58:27,706][INFO] -------------------------------------------------------------------------
+[2020-08-06 14:58:27,863][INFO] Running time [ params_show ]: 0.160 sec
+[2020-08-06 14:58:27,863][INFO] Running time [ save_args ]: 0.000 sec
+[2020-08-06 14:58:27,905][INFO] Running time [ run_tensorboard ]: 0.041 sec
+[2020-08-06 14:58:28,101][INFO] Running time [ load_data ]: 0.197 sec
+[2020-08-06 14:58:37,898][INFO] Running time [ extractor ]: 9.594 sec
+[2020-08-06 14:58:37,899][INFO] Running time [ criterion ]: 0.000 sec
+[2020-08-06 14:58:37,900][INFO] Running time [ get_optimizer ]: 0.000 sec
+[2020-08-06 14:58:37,900][INFO] Running time [ get_scheduler ]: 0.000 sec
+[2020-08-06 15:09:21,343][INFO] Running time [ train ]: 717.697 sec
+[2020-08-06 15:09:47,958][INFO] Running time [ train ]: 1276.987 sec
+[2020-08-06 15:29:00,757][INFO] Running time [ train ]: 1832.454 sec

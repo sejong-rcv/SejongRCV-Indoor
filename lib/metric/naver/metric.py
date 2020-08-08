@@ -37,9 +37,8 @@ def LocDegThreshMetric(args, indexdb, querydb, index_dataset, query_dataset, epo
 
 
     if args.topk_load is not None:
-        topk_path = os.path.join("./arxiv", args.topk_load)
-        newk_list = np.load(topk_path)
-        topk_list = newk_list[:topk_list.shape[0], :topk_list.shape[1]]
+        newk_list = np.load(args.topk_load)
+        topk_list = newk_list[:querydb['feat'].shape[0], :args.topk]
 
     else:
         if args.searching==0:
@@ -65,8 +64,7 @@ def LocDegThreshMetric(args, indexdb, querydb, index_dataset, query_dataset, epo
         
                 
         if args.topk_save is not None:
-            topk_path = os.path.join("./arxiv", args.topk_save)
-            np.save(topk_path, topk_list)
+            np.save(args.topk_save, topk_list)
 
     
 
