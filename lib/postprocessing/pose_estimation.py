@@ -9,15 +9,10 @@ import torch
 import pickle
 import cupy as cp
 
-from scipy.spatial.transform import Rotation 
-from scipy.spatial.distance import euclidean
 from pyquaternion import Quaternion
 
-from skimage.feature import match_descriptors
 from skimage.measure import ransac
-from skimage.transform import ProjectiveTransform
 from skimage.transform import AffineTransform
-
 
 from lib import datasets as db
 from lib import extractor as ex
@@ -38,10 +33,10 @@ class PoseEstimation():
         self.pose_noniter = args.pose_noniter
         self.pose_cupy = args.pose_cupy
 
-        if self.pose_ld == 0: # root SIFT
-            self.local_descriptor = he.SIFT(root=True)
-        elif self.pose_ld == 1: # SIFT
+        if self.pose_ld == 0: # SIFT
             self.local_descriptor = he.SIFT(root=False)
+        elif self.pose_ld == 1: # rootSIFT
+            self.local_descriptor = he.SIFT(root=True)
         elif self.pose_ld == 2: # D2 SS
             self.local_descriptor = ex.D2Net_local_extractor(args=args, 
                                                              model_file="./arxiv/d2_tf.pth",
@@ -155,22 +150,6 @@ class PoseEstimation():
             if pts_cloud is not None:
                 pts_3d = np.asarray(pts_3d)
 
-            inq = np.unique(pts_query, axis=0, return_index=True)[1]
-            ini = np.unique(pts_index, axis=0, return_index=True)[1]
-            if pts_cloud is not None:
-                in3 = np.unique(pts_3d, axis=0, return_index=True)[1]
-            interin = np.intersect1d(np.intersect1d(ini, in3), in3)
-            
-            pts_query = pts_query[interin]
-            pts_index = pts_index[interin]
-            if pts_cloud is not None:
-                pts_3d = pts_3d[interin]
-
-            model, inliers = ransac(
-                (pts_query, pts_index),
-                AffineTransform, min_samples=3,
-                residual_threshold=20, max_trials=1000
-            )
 
         elif (self.pose_ld==2) or (self.pose_ld==3):
             
@@ -191,23 +170,10 @@ class PoseEstimation():
             match_mask = np.where(match_cnt!=1)[0]
             matches = unique[match_mask]
 
-            kps_left = query_kps[matches[:, 0],:]
-            kps_right = index_kps[matches[:, 1],:]
+            pts_query = query_kps[matches[:, 0],:]
+            pts_index = index_kps[matches[:, 1],:]
             if pts_cloud is not None:
                 pts_3d = pts_cloud[matches[:, 1],:]
-            np.random.seed(0)
-
-            model, inliers = ransac(
-                (kps_left, kps_right),
-                AffineTransform, min_samples=3,
-                residual_threshold=20, max_trials=1000
-            )
-
-            pts_query = kps_left[inliers]
-            pts_index = kps_right[inliers]
-            if pts_cloud is not None:
-                pts_3d = pts_3d[inliers]
-            
             knn.delete()
             del knn
 
@@ -250,18 +216,6 @@ class PoseEstimation():
                 pts_3d = pts_cloud[matches[valid]]
             pts_query = pts_query * query_etc['scale_factor']
             pts_index = pts_index * index_etc['scale_factor']
-           
-            model, inliers = ransac(
-                (pts_query, pts_index),
-                AffineTransform, min_samples=3,
-                residual_threshold=20, max_trials=1000
-            )
-
-            pts_query = pts_query[inliers]
-            pts_index = inliers[inliers]
-            if pts_cloud is not None:
-                pts_3d = pts_3d[inliers]
-            
         
 
         return pts_query, pts_index, pts_3d, conf
@@ -569,15 +523,10 @@ class PoseEstimation():
             return cp.concatenate((pts, ones), axis=ax)
 
     def __hnormalized__(self, pts):
-        if self.pose_cupy is False:
-            src = pts.T if pts.shape[0]<pts.shape[1] else pts
-            dst = (src/src[:,2:])[:,:2]
-            return dst
-        else:
-            src = pts.T if pts.shape[0]<pts.shape[1] else pts
-            dst = (src/src[:,2:])[:,:2]
-            return dst
-    
+        src = pts.T if pts.shape[0]<pts.shape[1] else pts
+        dst = (src/src[:,2:])[:,:2]
+        return dst
+
     def __world2image__(self, qwxyz, t, K, point3d):
    
         if self.pose_cupy is False:
@@ -601,9 +550,9 @@ class PoseEstimation():
             Rm_inv = cp.asnumpy(Rm_inv)
             I[:3, :3] = cp.asarray(Rm)
             Iinv = cp.linalg.inv(I)
-            hpts3d = self.__homogeneousCoord__(point3d, self.pose_cupy).T
+            hpts3d = self.__homogeneousCoord__(cp.asarray(point3d)).T
             point3d_local = cp.matmul(Iinv, hpts3d)[0:3,:]
-            image_pixel = self.__hnormalized__(cp.matmul(cp.asarray(K), point3d_local).T, self.pose_cupy)
+            image_pixel = self.__hnormalized__(cp.matmul(cp.asarray(K), point3d_local).T)
             image_pixel = cp.asnumpy(image_pixel)
 
         return image_pixel, Rm_inv

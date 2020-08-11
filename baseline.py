@@ -70,32 +70,24 @@ def get_args():
 
     parser.add_argument('--pose_estimation',  action='store_true', help='Estimate accurate pose')
     parser.add_argument('--pose_pointcloud_load',  action='store_true', help='Using saved point cloud')
-    parser.add_argument('--pose_covisibility',  type=int, default=0, help='Recusive estimation')
+    parser.add_argument('--pose_covisibility',  type=int, default=0, help='Get 2D-3D pair adjacent (n) frame')
     parser.add_argument('--pose_noniter',  action='store_true', help='Stop iterative estimation, if pnp can not estimate pose, it would immediately use top1 pose')
     parser.add_argument('--pose_cupy',  action='store_true', help='Using cupy in calculating points')
     parser.add_argument('--pose_timechecker',  action='store_true', help='Time check in pose estimation')
 
     parser.add_argument('--lmr_score',  type=float, default=0, help='Reranking LMR score')
 
-    parser.add_argument('--qe_stacknum',  type=int, default=0, help='The number of stack in query expansion')
-    parser.add_argument('--qe_filter',  type=int, default=0, help='Inlier filter in query expansion')
-
     parser.add_argument('--topk_load',  type=str, default=None, help='Load topk npy')
     parser.add_argument('--topk_save',  type=str, default=None, help='Save topk npy')
 
-    parser.add_argument('--qe', type=int,  help='Select query expansion for post processing : \n \
-        0 - Average QE \n \
-        1 - Alpha QE \n \
-        ')
-    
     parser.add_argument('--rerank', type=int,  help='Select rerank for post processing : \n \
         0 - Local match rerank \n \
         1 - PnP rerank \n \
         ')
 
     parser.add_argument('--pose_ld', type=int,  help='Select local descriptor to use in the pose filter : \n \
-        0 - root SIFT \n \
-        1 - SIFT \n \
+        0 - SIFT \n \
+        1 - rootSIFT \n \
         2 - D2 SS \n \
         3 - D2 MS \n \
         4 - SuperGlue \n \
@@ -124,6 +116,11 @@ def get_args():
         3 - APGeM_LM18 \n \
         4 - Ensemble(APGeM + APGeM_LM18 + D2_NetVLAD) \n \
         5 - Ensemble(APGeM + APGeM_LM18 + Pitts_NetVLAD) \n \
+        6 - Ensemble(APGeM + APGeM_LM18) \n \
+        7 - Ensemble(APGeM + D2_NetVLAD) \n \
+        8 - Ensemble(APGeM + Pitts_NetVLAD) \n \
+        9 - Ensemble(APGeM_LM18 + D2_NetVLAD) \n \
+        10 - Ensemble(APGeM_LM18 + Pitts_NetVLAD) \n \
         ')
     parser.add_argument('--handcraft', type=int, help='Select handcraft algorithm : \n \
         0 - SIFT+VLAD \n \
@@ -150,9 +147,9 @@ def arg_name_converter(args, argname, argval):
 
     if argname == "pose_ld":
         if argval == 0:
-            return "root SIFT"
-        elif argval == 1:
             return "SIFT"
+        elif argval == 1:
+            return "rootSIFT"
         elif argval == 2:
             return "D2 SS"
         elif argval == 3:
@@ -164,16 +161,6 @@ def arg_name_converter(args, argname, argval):
                 raise ValueError('Invalid arg pose_ld!')
             else:
                 return "None"
-
-    elif argname == "qe":
-        if argval == 0:
-            return "Average QE"
-        elif argval == 1:
-            return "Alpha QE"
-        elif argval == None:
-            return "None"
-        else:
-            raise ValueError('Invalid arg qe!')
 
     elif argname == "rerank":
         if argval == 0:
@@ -232,6 +219,18 @@ def arg_name_converter(args, argname, argval):
             return "Ensemble(APGeM + APGeM_LM18 + D2_NetVLAD)"
         elif argval == 5:
             return "Ensemble(APGeM + APGeM_LM18 + Pitts_NetVLAD)"
+        elif argval == 6:
+            return "Ensemble(APGeM + APGeM_LM18)"
+        elif argval == 7:
+            return "Ensemble(APGeM + D2_NetVLAD)"
+        elif argval == 8:
+            return "Ensemble(APGeM + Pitts_NetVLAD)"
+        elif argval == 9:
+            return "Ensemble(APGeM_LM18 + D2_NetVLAD)"
+        elif argval == 10:
+            return "Ensemble(APGeM_LM18 + Pitts_NetVLAD)"
+        elif argval == 11:
+            return "Ensemble(D2_NetVLAD + Pitts_NetVLAD)"
         elif argval == None:
             return "None"
         else:
@@ -494,13 +493,14 @@ def extractor(args):
                               without_fc=False).cuda()
 
     elif args.extractor == 4:
+
         apgem = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet-101-AP-GeM.pt",without_fc=False).cuda()
         apgem_lm18 = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet101-AP-GeM-LM18.pt",without_fc=False).cuda()
 
-        ckpt = torch.load("./arxiv/D2_NetVLAD_traino_epoch024.pth.tar") # cluster 64
+        ckpt = torch.load("./arxiv/D2_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
         d2_netvlad = ckpt['model']
 
-        ext = ex.Ensemble3(apgem, apgem_lm18, d2_netvlad, is_backbone1=False, is_backbone2=False, is_backbone3=False).cuda()
+        ext = ex.Ensemble3(apgem, apgem_lm18, d2_netvlad, is_backbone1=False, is_backbone2=False, is_backbone3=False, dim=[1024, 1024, 4096]).cuda()
 
     elif args.extractor == 5:
 
@@ -510,10 +510,51 @@ def extractor(args):
         ckpt = torch.load("./arxiv/Pitts_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
         pitts_netvlad = ckpt['model']
 
-        ext = ex.Ensemble3(apgem, apgem_lm18, pitts_netvlad, is_backbone1=False, is_backbone2=False, is_backbone3=False).cuda()
+        ext = ex.Ensemble3(apgem, apgem_lm18, pitts_netvlad, is_backbone1=False, is_backbone2=False, is_backbone3=False, dim=[1024, 1024, 4096]).cuda()
+        
+    elif args.extractor == 6:
+
+        apgem = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet-101-AP-GeM.pt",without_fc=False).cuda()
+        apgem_lm18 = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet101-AP-GeM-LM18.pt",without_fc=False).cuda()
+        ext = ex.Ensemble2(apgem, apgem_lm18, is_backbone1=False, is_backbone2=False, dim=[1024, 1024]).cuda()
+    
+    elif args.extractor == 7:
+
+        apgem = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet-101-AP-GeM.pt",without_fc=False).cuda()
+        ckpt = torch.load("./arxiv/D2_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        d2_netvlad = ckpt['model']
+        ext = ex.Ensemble2(apgem, d2_netvlad, is_backbone1=False, is_backbone2=False, dim=[1024, 4096]).cuda()
+    
+    elif args.extractor == 8:
+
+        apgem = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet-101-AP-GeM.pt",without_fc=False).cuda()
+        ckpt = torch.load("./arxiv/Pitts_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        pitts_netvlad = ckpt['model']
+        ext = ex.Ensemble2(apgem, pitts_netvlad, is_backbone1=False, is_backbone2=False, dim=[1024, 4096]).cuda()
+
+    elif args.extractor == 9:
+
+        apgem_lm18 = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet101-AP-GeM-LM18.pt",without_fc=False).cuda()
+        ckpt = torch.load("./arxiv/D2_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        d2_netvlad = ckpt['model']
+        ext = ex.Ensemble2(apgem_lm18, d2_netvlad, is_backbone1=False, is_backbone2=False, dim=[1024, 4096]).cuda()
+    
+    elif args.extractor == 10:
+
+        apgem_lm18 = ex.create_model("resnet101_rmac",pretrained="./arxiv/Resnet101-AP-GeM-LM18.pt",without_fc=False).cuda()
+        ckpt = torch.load("./arxiv/Pitts_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        pitts_netvlad = ckpt['model']
+        ext = ex.Ensemble2(apgem_lm18, pitts_netvlad, is_backbone1=False, is_backbone2=False, dim=[1024, 4096]).cuda()
+    
+    elif args.extractor == 11:
+
+        ckpt = torch.load("./arxiv/D2_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        d2_netvlad = ckpt['model']
+        ckpt = torch.load("./arxiv/Pitts_NetVLAD_trainO_epoch024.pth.tar") # cluster 64
+        pitts_netvlad = ckpt['model']
+        ext = ex.Ensemble2(d2_netvlad, pitts_netvlad, is_backbone1=False, is_backbone2=False, dim=[4096, 4096]).cuda()
 
     return ext
-
 
 @u.timer
 def criterion(args):
@@ -683,7 +724,12 @@ def train(args, train_loader, valid_loader, index_loader, valid_dataset, index_d
             #valid
             validdb = make_inferDBandPredict(args, valid_loader, ext, epoch, tp='valid')
 
+            
+
             if args.db_load is None:
+                if (args.extractor>=4):
+                    indexdb['feat'], validdb['feat'] = ext.postprocessing(indexdb['feat'], validdb['feat'])
+
                 if args.pca is True:
                     pca = pp.PCAwhitening(pca_dim=args.pca_dim, pca_whitening=True)
                     indexdb['feat'] = pca.fit_transform(indexdb['feat'])      
@@ -728,21 +774,22 @@ def test(args, test_loader, index_loader, test_dataset, index_dataset, save_root
     #valid
     testdb = make_inferDBandPredict(args, test_loader, ext, 0, tp='test')   
     
-    if (args.db_save is not None):
+    if args.db_load is None:
+        if (args.extractor>=4):
+            indexdb['feat'], testdb['feat'] = ext.postprocessing(indexdb['feat'], testdb['feat'])
 
+        if (args.pca is True):
+            pca = pp.PCAwhitening(pca_dim=args.pca_dim, pca_whitening=True)
+            indexdb['feat'] = pca.fit_transform(indexdb['feat'])      
+            testdb['feat'] = pca.transform(testdb['feat'])     
+
+    if (args.db_save is not None):
         if os.path.isfile(args.db_save) is True:
             os.remove(args.db_save)
         a_file = open(args.db_save, "wb")
         pickle.dump(indexdb, a_file)
         a_file.close()
     
-    if (args.extractor==6) | (args.extractor==7):
-        indexdb['feat'], testdb['feat'] = ext.postprocessing(indexdb['feat'], testdb['feat'], dim=[1024, 1024, 4096])
-
-    elif (args.pca is True):
-        pca = pp.PCAwhitening(pca_dim=args.pca_dim, pca_whitening=True)
-        indexdb['feat'] = pca.fit_transform(indexdb['feat'])      
-        testdb['feat'] = pca.transform(testdb['feat'])         
 
 
     mt.LocDegThreshMetric(args, indexdb, testdb, index_dataset, test_dataset, 0, os.path.join(save_root, "result"))
@@ -761,8 +808,6 @@ def make_inferDBandPredict(args, loader, ext, epoch, tp='index'):
     labeldb = []
     posedb = []
     indexdb = []
-
-
     
     with torch.no_grad():
         for batch_i, data in pbar:

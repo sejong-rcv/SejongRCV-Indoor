@@ -54,19 +54,12 @@ def LocDegThreshMetric(args, indexdb, querydb, index_dataset, query_dataset, epo
             topk_list = diffusion.search()
             topk_list = topk_list[:, :args.topk]
 
-        if args.qe is not None:
-            query_expansion = pp.QueryExpansion(args)
-            topk_list = query_expansion(args, topk_list, querydb, indexdb, query_dataset, index_dataset)
-
-        if args.rerank is not None:
-            rerank = pp.Rerank(args)
-            topk_list = rerank(args, topk_list, querydb, indexdb, query_dataset, index_dataset)
-        
-                
-        if args.topk_save is not None:
-            np.save(args.topk_save, topk_list)
-
-    
+    if args.rerank is not None:
+        rerank = pp.Rerank(args)
+        topk_list = rerank(args, topk_list, querydb, indexdb, query_dataset, index_dataset)
+            
+    if args.topk_save is not None:
+        np.save(args.topk_save, topk_list)
 
     q_xyz = None
     q_qwxyz = None
@@ -121,23 +114,25 @@ def LocDegThreshMetric(args, indexdb, querydb, index_dataset, query_dataset, epo
                     pred_qtn = Quaternion(q_qwxyz[tpki].tolist())
                 else:
                     break
+            try:
+                dist_diff = euclidean(gt_xyz, pred_xyz)
 
-            dist_diff = euclidean(gt_xyz, pred_xyz)
+                deg_diff = (gt_qtn.conjugate*pred_qtn).degrees
+                deg_diff = abs(deg_diff)
 
-            deg_diff = (gt_qtn.conjugate*pred_qtn).degrees
-            deg_diff = abs(deg_diff)
+                all_list.append([dist_diff, deg_diff, val])
 
-            all_list.append([dist_diff, deg_diff, val])
-
-            if (near[0]>=dist_diff) and (near[1]>=deg_diff):
-                nt_list.append(val)
-                n_true+=1
-            if (medium[0]>=dist_diff) and (medium[1]>=deg_diff):
-                mt_list.append(val)
-                m_true+=1
-            if (far[0]>=dist_diff) and (far[1]>=deg_diff):
-                ft_list.append(val)
-                f_true+=1
+                if (near[0]>=dist_diff) and (near[1]>=deg_diff):
+                    nt_list.append(val)
+                    n_true+=1
+                if (medium[0]>=dist_diff) and (medium[1]>=deg_diff):
+                    mt_list.append(val)
+                    m_true+=1
+                if (far[0]>=dist_diff) and (far[1]>=deg_diff):
+                    ft_list.append(val)
+                    f_true+=1
+            except:
+                all_list.append([10E-3, 10E-3, 10E-3])
 
             if args.pose_estimation is True:
                 idist_diff = euclidean(gt_xyz, index_xyz)

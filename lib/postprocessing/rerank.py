@@ -20,10 +20,10 @@ class Rerank():
         self.rerank = args.rerank
         self.lmr_score = args.lmr_score
         
-        if self.pose_ld == 0: # root SIFT
-            self.local_descriptor = he.SIFT(root=True)
-        elif self.pose_ld == 1: # SIFT
+        if self.pose_ld == 0: # SIFT
             self.local_descriptor = he.SIFT(root=False)
+        elif self.pose_ld == 1: # rootSIFT
+            self.local_descriptor = he.SIFT(root=True)
         elif self.pose_ld == 2: # D2 SS
             self.local_descriptor = ex.D2Net_local_extractor(args=args, 
                                                              model_file="./arxiv/d2_tf.pth",
@@ -62,7 +62,7 @@ class Rerank():
         topk_newlist, _ = pose_estimation.rerank(args, querydb, indexdb, query_dataset, index_dataset, topk_list)
         return topk_newlist
 
-    def local_match_rerank(self, args, topk_list, querydb, indexdb, query_dataset, index_dataset, thr=0.9):
+    def local_match_rerank(self, args, topk_list, querydb, indexdb, query_dataset, index_dataset, thr=0):
         if isinstance(querydb['feat'], np.ndarray):
             query_feats = querydb['feat']
             index_feats = indexdb['feat']
@@ -77,6 +77,8 @@ class Rerank():
         iter_desc = "Rerank!"
         
         for qi, index_i_list in enumerate(tqdm.tqdm(topk_list, desc=iter_desc)):
+            
+       
             query_ind = querydb['index'][qi]
             if self.pose_ld==4:
                 query_img = query_dataset.__loadimg__(query_ind, tflag=False, gray=True)['image']
@@ -96,10 +98,14 @@ class Rerank():
                     index_img = index_dataset.__loadimg__(index_ind, tflag=False, name=False)['image']
 
                 index_kps, index_desc, index_score, index_etc = self.local_extract(index_img)
+
                 num_inlier, _, _, conf = self.local_match(query_kps, query_desc, query_score, query_etc, \
                                                     index_kps, index_desc, index_score, index_etc)
 
-                num_inlier_sub.append((conf>=thr).sum())
+                if conf is None:
+                    num_inlier_sub.append(num_inlier)
+                else:
+                    num_inlier_sub.append((conf>=thr).sum())
                 posk_list_sub.append(neigh)
 
             num_inlier_sub = np.asarray(num_inlier_sub)
@@ -153,32 +159,30 @@ class Rerank():
         
         conf=None
         if (self.pose_ld==0) or (self.pose_ld==1):
-            FLANN_INDEX_KDTREE = 0
-            index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
-            search_params = dict(checks=50)
-            matcher = cv2.FlannBasedMatcher(index_params,search_params)
-            matches = matcher.knnMatch(query_desc, index_desc, k=2)
+            if (query_kps.shape[0]>=2) & (index_kps.shape[0]>=2):
+                FLANN_INDEX_KDTREE = 0
+                index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
+                search_params = dict(checks=50)
+                matcher = cv2.FlannBasedMatcher(index_params,search_params)
+                matches = matcher.knnMatch(query_desc, index_desc, k=2)
 
-            pts_1 = []
-            pts_2 = []
+                pts_1 = []
+                pts_2 = []
 
-            for i,(m,n) in enumerate(matches):
-                if m.distance < 0.7*n.distance:
-                    pts_1.append(query_kps[m.queryIdx])
-                    pts_2.append(index_kps[m.trainIdx])
+                for i,(m,n) in enumerate(matches):
+                    if m.distance < 0.7*n.distance:
+                        pts_1.append(query_kps[m.queryIdx])
+                        pts_2.append(index_kps[m.trainIdx])
+                
+                pts_query = np.asarray(pts_1)
+                pts_index = np.asarray(pts_2)
+
+                num_inlier = pts_query.shape[0]
+            else:
+                pts_query = None
+                pts_index = None
+                num_inlier = 0
             
-            pts_query = np.asarray(pts_1)
-            pts_index = np.asarray(pts_2)
-
-            inq = np.unique(pts_query, axis=0, return_index=True)[1]
-            ini = np.unique(pts_index, axis=0, return_index=True)[1]
-            
-            interin = np.intersect1d(ini, in3)
-            
-            pts_query = pts_query[interin]
-            pts_index = pts_index[interin]
-
-            num_inlier = pts_query.shape[0]
 
         elif (self.pose_ld==2) or (self.pose_ld==3):
             
@@ -199,20 +203,10 @@ class Rerank():
             match_mask = np.where(match_cnt!=1)[0]
             matches = unique[match_mask]
 
-            kps_left = query_kps[matches[:, 0],:]
-            kps_right = index_kps[matches[:, 1],:]
-            np.random.seed(0)
+            pts_query = query_kps[matches[:, 0],:]
+            pts_index = index_kps[matches[:, 1],:]
 
-            model, inliers = ransac(
-                (kps_left, kps_right),
-                AffineTransform, min_samples=3,
-                residual_threshold=4, max_trials=1000
-            )
-
-            pts_query = kps_left[inliers]
-            pts_index = kps_right[inliers]
-
-            num_inlier = inliers.sum()
+            num_inlier = pts_query.shape[0]
             knn.delete()
             del knn
 
