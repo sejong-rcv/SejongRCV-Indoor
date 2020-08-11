@@ -15,6 +15,8 @@ This repository contains the implementation of the solution of indoor 3rd rank t
 docker pull clockjw/naver-ml-challenge
 ```
 
+
+
 ## Dataset  
   
 Running this code requires M/L Challenge 2020 Dataset. (available [here](https://challenge.naverlabs.com/))  
@@ -103,7 +105,6 @@ if you want to stack (n) frames, please add argument "--pose_covisibility"
 if you want to use cupy, please add argument "--pose_cupy"
 
 
-## Extractor
 
 - **[EXTRACTOR_FLAG]**
   - 0 : D2_NetVLAD (D2 means VGG16 provided by [D2Net](https://github.com/mihaidusmanu/d2-net))
@@ -117,7 +118,7 @@ if you want to use cupy, please add argument "--pose_cupy"
   - 8 : Ensemble(APGeM + Pitts_NetVLAD)  
   - 9 : Ensemble(APGeM_LM18 + D2_NetVLAD)  
   - 10 : Ensemble(APGeM_LM18 + Pitts_NetVLAD)  
-  
+
 If you want to train handcraft extractor, use below instead of "--extractor"
 
 ```
