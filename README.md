@@ -1,6 +1,8 @@
 # SejongRCV-Indoor
 
 This repository contains the implementation of the solution of indoor 3rd rank team SejongRCV-Indoor in NAVER LABS Mapping & Localization Challenge 
+<br/><br/><br/><br/>
+
 
 ## Installation
 
@@ -14,7 +16,7 @@ This repository contains the implementation of the solution of indoor 3rd rank t
 ```
 docker pull clockjw/naver-ml-challenge
 ```
-
+<br/><br/><br/><br/>
 
 
 ## Dataset  
@@ -55,6 +57,7 @@ The data path can be checked below.
 |   |   |   +-- csv
 |   |   |   |   +-- test_[floor].csv
 ```
+<br/><br/><br/><br/>
 
 ## Image retrieval
 - **Train only**
@@ -79,32 +82,6 @@ And if you want to use smaller validation sampling set, use "--valid_sample" ins
 python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --test \
         --dataset [DATASET_FLAG] --extractor [EXTRACTOR_FLAG] --searching [SEARCHING_FLAG] --metric 0
 ```
-
-
-## Reranking
-
-```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
-        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
-        --searching [SEARCHING_FLAG] --metric 0 --valid --pose_ld [POSE_LD_FLAG] --rerank [RERANK_FLAG]
-```
-
-if you want to use lmr, please add argument "--lmr_score"
-
-
-
-## Pose estimation
-
-```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
-        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
-        --searching [SEARCHING_FLAG] --metric 0 --valid --pose_ld [POSE_LD_FLAG] --pose_estimation --pose_noniter
-```
-if you want to use saved pointcloud, please add argument "--pose_pointcloud_load"  
-if you want to stack (n) frames, please add argument "--pose_covisibility"  
-if you want to use cupy, please add argument "--pose_cupy"
-
-
 
 - **[EXTRACTOR_FLAG]**
   - 0 : D2_NetVLAD (D2 means VGG16 provided by [D2Net](https://github.com/mihaidusmanu/d2-net))
@@ -132,3 +109,34 @@ If you want to train handcraft extractor, use below instead of "--extractor"
 
 - **Trained weight**
   - [checkpoint](https://drive.google.com/file/d/1q7uvGpmsJevyG99uvG_8on91jUDKBWvr/view?usp=sharing)
+
+
+
+<br/><br/><br/><br/>
+
+## Reranking
+
+```
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
+        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
+        --searching [SEARCHING_FLAG] --metric 0 --valid --pose_ld [POSE_LD_FLAG] --rerank [RERANK_FLAG]
+```
+
+if you want to use lmr, please add argument "--lmr_score"
+<br/><br/><br/><br/>
+
+
+## Pose estimation
+
+```
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
+        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
+        --searching [SEARCHING_FLAG] --metric 0 --valid --pose_ld [POSE_LD_FLAG] --pose_estimation --pose_noniter
+```
+if you want to use saved pointcloud, please add argument "--pose_pointcloud_load"  
+if you want to stack (n) frames, please add argument "--pose_covisibility"  
+if you want to use cupy, please add argument "--pose_cupy"
+<br/><br/><br/><br/>
+
+
+
