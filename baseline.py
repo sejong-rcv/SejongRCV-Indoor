@@ -456,6 +456,7 @@ def load_data(args):
         train_loader,valid_loader,index_loader,test_loader
 @u.timer
 def extractor(args):
+    ext = None
     if args.extractor == 0:
         d2 = ex.D2Net(model_file="./arxiv/d2_tf.pth").dense_feature_extraction
         netvlad = ex.NetVLAD(num_clusters=args.cluster, dim=512, alpha=1.0)
@@ -564,6 +565,7 @@ def criterion(args):
 
 @u.timer
 def handcraft_extractor(args):
+    ext = None
     if args.handcraft == 0:
         ext = he.VLAD(ld = "sift")
     elif args.handcraft == 1:
@@ -572,6 +574,7 @@ def handcraft_extractor(args):
 
 @u.timer
 def get_optimizer(args, model):
+    optim = None
     if args.optimizer == 0:
         optim = torch.optim.Adam(model.parameters(), lr=args.lr)
 
@@ -579,6 +582,7 @@ def get_optimizer(args, model):
 
 @u.timer
 def get_scheduler(args, optim):
+    sche = None
     if args.scheduler == 0:
         sche = torch.optim.lr_scheduler.CosineAnnealingLR(optim, T_max=30)
     elif args.scheduler == 1:
@@ -630,8 +634,8 @@ def train_handcraft(args, train_loader, valid_loader, index_loader, valid_datase
             ext.extract_vlad_query(data)
 
         indexdb, validdb = ext.get_data()
-
-        ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, 0, os.path.join(save_root, "result"))
+        if args.metric==0:
+            ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, 0, os.path.join(save_root, "result"))
     return 
 
 @u.timer
@@ -742,8 +746,8 @@ def train(args, train_loader, valid_loader, index_loader, valid_dataset, index_d
                 pickle.dump(indexdb, a_file)
                 a_file.close()
 
-
-            ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, epoch, os.path.join(save_root, "result"))
+            if args.metric==0:
+                ldm = mt.LocDegThreshMetric(args, indexdb, validdb, index_dataset, valid_dataset, epoch, os.path.join(save_root, "result"))
 
             if args.train is False:
                 return
@@ -791,8 +795,8 @@ def test(args, test_loader, index_loader, test_dataset, index_dataset, save_root
         a_file.close()
     
 
-
-    mt.LocDegThreshMetric(args, indexdb, testdb, index_dataset, test_dataset, 0, os.path.join(save_root, "result"))
+    if args.metric==0:
+        mt.LocDegThreshMetric(args, indexdb, testdb, index_dataset, test_dataset, 0, os.path.join(save_root, "result"))
 
     return 
 
