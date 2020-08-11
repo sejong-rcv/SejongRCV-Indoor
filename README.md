@@ -139,4 +139,12 @@ if you want to use cupy, please add argument "--pose_cupy"
 <br/><br/><br/><br/>
 
 
-
+## Reference
+[1] https://challenge.naverlabs.com/  
+[2] https://github.com/Relja/netvlad  
+[3] https://github.com/Nanne/pytorch-NetVlad  
+[4] https://github.com/lyakaap/NetVLAD-pytorch  
+[5] https://github.com/magicleap/SuperGluePretrainedNetwork  
+[6] https://github.com/mihaidusmanu/d2-net  
+[7] https://github.com/almazan/deep-image-retrieval  
+ 
