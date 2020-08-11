@@ -62,16 +62,18 @@ The data path can be checked below.
 ## Image retrieval
 - **Train only**
 ```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
-        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
-        --searching [SEARCHING_FLAG] --metric 0
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 \ 
+                   --save_folder [SAVE_FOLDER] --train --cluster 64 --tuple \
+                   --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 \
+                   --extractor [EXTRACTOR_FLAG] --searching [SEARCHING_FLAG] --metric 0
 ```
 
 - **Train & Vaild**
 ```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
-        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
-        --searching [SEARCHING_FLAG] --metric 0 --valid
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 \
+                   --save_folder [SAVE_FOLDER] --train --cluster 64 --tuple \
+                   --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 \
+                   --extractor [EXTRACTOR_FLAG] --searching [SEARCHING_FLAG] --metric 0 --valid
 ```
  
 And if you want to use smaller validation sampling set, use "--valid_sample" instead of "--valid"
@@ -79,8 +81,9 @@ And if you want to use smaller validation sampling set, use "--valid_sample" ins
 
 - **Test**
 ```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --test \
-        --dataset [DATASET_FLAG] --extractor [EXTRACTOR_FLAG] --searching [SEARCHING_FLAG] --metric 0
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 \
+                   --save_folder [SAVE_FOLDER] --test --dataset [DATASET_FLAG] --extractor [EXTRACTOR_FLAG] \
+                   --searching [SEARCHING_FLAG] --metric 0
 ```
 
 - **[EXTRACTOR_FLAG]**
@@ -117,9 +120,11 @@ If you want to train handcraft extractor, use below instead of "--extractor"
 ## Reranking
 
 ```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
-        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
-        --searching [SEARCHING_FLAG] --metric 0 --valid --pose_ld [POSE_LD_FLAG] --rerank [RERANK_FLAG]
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 \
+                   --save_folder [SAVE_FOLDER] --train --cluster 64 --tuple \
+                   --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 \
+                   --extractor [EXTRACTOR_FLAG] --searching [SEARCHING_FLAG] --metric 0 --valid \
+                   --pose_ld [POSE_LD_FLAG] --rerank [RERANK_FLAG]
 ```
 
 if you want to use lmr, please add argument "--lmr_score"
@@ -129,9 +134,11 @@ if you want to use lmr, please add argument "--lmr_score"
 ## Pose estimation
 
 ```
-python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 --save_folder [SAVE_FOLDER] --train --cluster 64 \
-        --tuple --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 --extractor [EXTRACTOR_FLAG] \
-        --searching [SEARCHING_FLAG] --metric 0 --valid --pose_ld [POSE_LD_FLAG] --pose_estimation --pose_noniter
+python baseline.py --image_size 512 512 --batch 1 --shuffle --workers 8 \
+                   --save_folder [SAVE_FOLDER] --train --cluster 64 --tuple \
+                   --positive_selection 0 --dataset [DATASET_FLAG] --optimizer 0 --scheduler 1 \
+                   --extractor [EXTRACTOR_FLAG] --searching [SEARCHING_FLAG] --metric 0 --valid \
+                   --pose_ld [POSE_LD_FLAG] --pose_estimation --pose_noniter
 ```
 if you want to use saved pointcloud, please add argument "--pose_pointcloud_load"  
 if you want to stack (n) frames, please add argument "--pose_covisibility"  
