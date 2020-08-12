@@ -111,7 +111,7 @@ If you want to train handcraft extractor, use below instead of "--extractor"
 
 
 - **Trained weight**
-  - [checkpoint](https://drive.google.com/file/d/1q7uvGpmsJevyG99uvG_8on91jUDKBWvr/view?usp=sharing)
+  - [checkpoint](https://drive.google.com/file/d/1M_FRhv7Md7qYFh8p3CpyELwUjijN9HyR/view?usp=sharing)
 
 
 
