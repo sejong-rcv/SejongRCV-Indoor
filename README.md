@@ -114,8 +114,8 @@ If you want to train handcraft extractor, use below instead of "--extractor"
   - [checkpoint](https://drive.google.com/file/d/1M_FRhv7Md7qYFh8p3CpyELwUjijN9HyR/view?usp=sharing)
   - Place it like this
   ```
-  |   |   +-- arxiv
-  |   |   |   +-- tar or pth or pt or pkl (contents of zip)
++-- arxiv
+|   +-- tar or pth or pt or pkl (contents of zip)
   ```
 
 
