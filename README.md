@@ -3,6 +3,15 @@
 This repository contains the implementation of the solution of indoor 3rd rank team SejongRCV-Indoor in NAVER LABS Mapping & Localization Challenge 
 <br/><br/><br/><br/>
 
+## Publication
+
+3rd Place Solution to NAVER LABS Mapping & Localization Challenge 2020: Indoor Track (IPIU2021)
+- Published Paper : [[Link](https://github.com/sejong-rcv/SejongRCV-Indoor/files/5911122/default.pdf)]
+- Modified Paper(Modified in Table 4) : [[Link](https://github.com/sejong-rcv/SejongRCV-Indoor/files/5911129/3rd.Place.Solution.to.NAVER.LABS.Mapping.and.Localization.Challenge.2020.Indoor.Track.pdf)] 
+- Presentation materials : [[Link](https://github.com/sejong-rcv/SejongRCV-Indoor/files/5911387/IPIU.pdf)]
+- Presentation video : [[Link](https://youtu.be/J5143Ct6Tdo)]
+
+<br/><br/><br/><br/>
 
 ## Installation
 
